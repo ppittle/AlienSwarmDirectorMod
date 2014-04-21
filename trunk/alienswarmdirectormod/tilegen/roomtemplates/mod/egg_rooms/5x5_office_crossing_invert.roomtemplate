@@ -1,0 +1,44 @@
+"rooms\5x5_office_crossing_invert"
+{
+	"TilesX"		"5"
+	"TilesY"		"5"
+	"SpawnWeight"		"0"
+	"TileType"		"151587341"
+	"EXIT"
+	{
+		"XPos"		"2"
+		"YPos"		"4"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"2"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"2"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"4"
+		"YPos"		"2"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"Tags"
+	{
+		"tag"		"Special"
+		"tag"		"Egg Room"
+	}
+}

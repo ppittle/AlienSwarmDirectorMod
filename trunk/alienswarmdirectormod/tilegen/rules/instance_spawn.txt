@@ -1,0 +1,173 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	// Spawns instances in random room templates
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"SpawnInstances"
+		"friendly_name"	"Spawn Instances"
+		"description"	"Randomly spawn instances in rooms."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Filename"
+			"friendly_name"	"Filename"
+			"description"	"Instance filename."
+			"type"	"instance_name"
+			"source"	"literal"
+		}
+
+		"param"
+		{
+			"name"	"$InstanceCount"
+			"friendly_name"	"Instance Count"
+			"description"	"Number of instances to swap in."
+			"type"	"int"
+			"source"	"literal"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomTemplateFilters"
+			"friendly_name"	"Room Template Filters"
+			"description"	"Room templates to consider for instance swapping."
+			"type"	"room_template_filter"
+			"source"	"expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+
+		"param"
+		{
+			"name"	"$AdditionalKeyValues"
+			"friendly_name"	"Key Values"
+			"description"	"Additional key values to add to the func_instance."
+			"type"	"key_value"
+			"array"	"unordered"
+			"source"	"expression"
+		}
+			
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"SpawnInstances_%Unique"
+				
+				"action"
+				{
+					"class"	"CTilegenAction_AddInstances"
+					
+					"filename"	"$Filename"
+					"type"	"add_at_random_node"
+					"_elide"	"$AdditionalKeyValues"
+					"instance_count"	"$InstanceCount"
+					"room_template_filter"
+					{
+						"class"	"&&"
+						"_elide"	"$RoomTemplateFilters"
+					}
+				}
+				
+				"action"
+				{
+					"class"	"CTilegenAction_SwitchState"
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Spawns an instance in a particular room
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"SpawnInstanceInLastRoom"
+		"friendly_name"	"Spawn Instance in Last Room"
+		"description"	"Spawn an instance in the last placed room."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Filename"
+			"friendly_name"	"Filename"
+			"description"	"Instance filename."
+			"type"	"instance_name"
+			"source"	"literal"
+		}
+
+		"param"
+		{
+			"name"	"$AdditionalKeyValues"
+			"friendly_name"	"Key Values"
+			"description"	"Additional key values to add to the func_instance."
+			"type"	"key_value"
+			"array"	"unordered"
+			"source"	"expression"
+		}
+			
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"SpawnInstanceInLastRoom_%Unique"
+				
+				"action"
+				{
+					"class"	"CTilegenAction_AddInstanceToRoom"
+					
+					"filename"	"$Filename"
+					"type"	"add_at_random_node"
+					"_elide"	"$AdditionalKeyValues"
+					"room"
+					{
+						"class"	"CTilegenExpression_LastPlacedRoom"
+					}
+				}
+				
+				"action"
+				{
+					"class"	"CTilegenAction_SwitchState"
+				}
+			}
+		}
+	}
+	
+	"rule"
+	{
+		"name"	"KeyValue"
+		"friendly_name"	"Key Value"
+		"description"	"An additional key value to be added to the instance."
+		"type"	"key_value"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Key"
+			"friendly_name"	"Key"
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"param"
+		{
+			"name"	"$Value"
+			"friendly_name"	"Value"
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"substitute"
+		{
+			"key_value"
+			{
+				"key"	"$Key"
+				"value"	"$Value"
+			}
+		}	
+	}
+}

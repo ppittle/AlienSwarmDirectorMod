@@ -1,0 +1,63 @@
+"rooms\4x2_corridor_room"
+{
+	"TilesX"		"4"
+	"TilesY"		"2"
+	"SpawnWeight"		"0"
+	"TileType"		"0"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"0"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"1"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"1"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"1"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"3"
+		"YPos"		"1"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+}

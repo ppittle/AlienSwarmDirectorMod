@@ -1,0 +1,136 @@
+versioninfo
+{
+	"editorversion" "400"
+	"editorbuild" "4961"
+	"mapversion" "3"
+	"formatversion" "100"
+	"prefab" "0"
+}
+visgroups
+{
+}
+viewsettings
+{
+	"bSnapToGrid" "1"
+	"bShowGrid" "1"
+	"bShowLogicalGrid" "0"
+	"nGridSpacing" "64"
+	"bShow3DGrid" "0"
+}
+world
+{
+	"id" "1"
+	"mapversion" "3"
+	"classname" "worldspawn"
+	"detailmaterial" "detail/detailsprites"
+	"detailvbsp" "detail.vbsp"
+	"maxpropscreenwidth" "-1"
+	"skyname" "blacksky"
+	group
+	{
+		"id" "2"
+		editor
+		{
+			"color" "233 158 0"
+			"visgroupshown" "1"
+			"visgroupautoshown" "1"
+		}
+	}
+}
+entity
+{
+	"id" "7"
+	"classname" "func_detail"
+	solid
+	{
+		"id" "8"
+		side
+		{
+			"id" "48"
+			"plane" "(256 256 160) (256 256 0) (256 0 0)"
+			"material" "METAL/RES_METALWALL001A"
+			"uaxis" "[0 -1 0 -37] 0.35"
+			"vaxis" "[0 0 -1 489] 0.35"
+			"rotation" "0"
+			"lightmapscale" "8"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "47"
+			"plane" "(0 256 160) (0 256 0) (256 256 0)"
+			"material" "METAL/RES_METALWALL001A"
+			"uaxis" "[-1 0 0 -37] 0.35"
+			"vaxis" "[0 0 -1 489] 0.35"
+			"rotation" "0"
+			"lightmapscale" "8"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "46"
+			"plane" "(0 0 160) (0 0 0) (0 256 0)"
+			"material" "METAL/RES_METALWALL001A"
+			"uaxis" "[0 -1 0 -36.5714] 0.35"
+			"vaxis" "[0 0 -1 489] 0.35"
+			"rotation" "0"
+			"lightmapscale" "8"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "45"
+			"plane" "(256 0 160) (256 0 0) (0 0 0)"
+			"material" "METAL/RES_METALWALL001A"
+			"uaxis" "[-1 0 0 -37] 0.35"
+			"vaxis" "[0 0 -1 489] 0.35"
+			"rotation" "0"
+			"lightmapscale" "8"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "44"
+			"plane" "(0 0 160) (0 256 160) (256 256 160)"
+			"material" "TOOLS/TOOLSNOLIGHT"
+			"uaxis" "[-1 0 0 0] 0.25"
+			"vaxis" "[0 1 0 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "8"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "43"
+			"plane" "(256 0 0) (256 256 0) (0 256 0)"
+			"material" "TOOLS/TOOLSNODRAW"
+			"uaxis" "[-1 0 0 -14] 1"
+			"vaxis" "[0 1 0 16] 1"
+			"rotation" "0"
+			"lightmapscale" "32"
+			"smoothing_groups" "0"
+		}
+		editor
+		{
+			"color" "233 158 0"
+			"visgroupshown" "1"
+			"visgroupautoshown" "1"
+		}
+	}
+	editor
+	{
+		"color" "233 158 0"
+		"groupid" "2"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[10500 10500]"
+	}
+}
+cameras
+{
+	"activecamera" "-1"
+}
+cordons
+{
+	"active" "0"
+}

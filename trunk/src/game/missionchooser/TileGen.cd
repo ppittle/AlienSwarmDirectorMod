@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CASW_Mission_Chooser">
+    <Position X="0.5" Y="0.5" Width="5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Typedef Name="CASW_Mission_Chooser::BaseClass" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>asw_mission_chooser.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAgAAAAAAAIAAAAIAAAAAAggAAAAACDAgAAAA=</HashCode>
+      <FileName>asw_mission_chooser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CASW_Entry">
+    <Position X="5.75" Y="0.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAgAASAAAAAICAAAAAAKBAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>asw_spawn_selection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CASW_Spawn_Definition">
+    <Position X="5.75" Y="4.25" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAFAAQAAAAAAgAAAAAAAAAAEkAIAEEAAAAA=</HashCode>
+      <FileName>asw_spawn_selection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CASW_Spawn_Set">
+    <Position X="5.75" Y="7.5" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EEAAIACAAIAVAECAAACAAIAAAIgAgAAMABAAAEgAIAA=</HashCode>
+      <FileName>asw_spawn_selection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CASW_Spawn_Selection">
+    <Position X="1.25" Y="4.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAIABACEAAAABAACCAQABAAAQAAgAAAAAABCAAAIAgA=</HashCode>
+      <FileName>asw_spawn_selection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTilegenStateList" Collapsed="true">
+    <Position X="1.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAEAAAAACAAAAAAIAAAAAAAAAQAAEGAAABEoACAg=</HashCode>
+      <FileName>layout_system\tilegen_layout_system.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLayoutSystem">
+    <Position X="1.25" Y="9.25" Width="4.25" />
+    <NestedTypes>
+      <Struct Name="CLayoutSystem::ActionData_t" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>layout_system\tilegen_layout_system.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="CLayoutSystem::CurrentIterationState_t" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>layout_system\tilegen_layout_system.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAAAhgARMCChBwoAIAABAASogOAKQAEAACAAFAaWFA=</HashCode>
+      <FileName>layout_system\tilegen_layout_system.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ActionConditionPair_t" Collapsed="true">
+    <Position X="1.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAIAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>layout_system\tilegen_layout_system.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

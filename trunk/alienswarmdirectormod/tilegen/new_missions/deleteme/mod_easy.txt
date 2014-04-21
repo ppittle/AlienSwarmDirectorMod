@@ -1,0 +1,86 @@
+"Mission"
+{
+	"Filename"		"mod_easy.txt"
+	"rule_instance"
+	{
+		"name"		"GlobalOptionBlock"
+		"$MissionName"		"Escape"
+		"$MissionDescription"		"Randomly generated escape mission."
+		"$GlobalTheme"		"mod"
+	}
+	"name"		"MOD Escape Only - EASY"
+	"rule_instance"
+	{
+		"name"		"PlaceRandomStartRoom"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"1"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomTemplateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"Disallow1x1"
+				}
+			}
+		}
+		"$ExitFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowSouthGrowing"
+				}
+			}
+		}
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\mod_corridors\1x4_corridor_door_medium"
+						"$Fraction"		"1"
+					}
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"PlaceRandomEscapeRoom"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"CapLevel"
+	}
+}

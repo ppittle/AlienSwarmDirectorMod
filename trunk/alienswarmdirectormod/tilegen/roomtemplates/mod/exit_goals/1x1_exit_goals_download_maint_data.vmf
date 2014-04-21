@@ -1,0 +1,88 @@
+versioninfo
+{
+	"editorversion" "400"
+	"editorbuild" "5032"
+	"mapversion" "5"
+	"formatversion" "100"
+	"prefab" "0"
+}
+visgroups
+{
+}
+viewsettings
+{
+	"bSnapToGrid" "1"
+	"bShowGrid" "1"
+	"bShowLogicalGrid" "0"
+	"nGridSpacing" "64"
+	"bShow3DGrid" "0"
+}
+world
+{
+	"id" "1"
+	"mapversion" "5"
+	"classname" "worldspawn"
+	"detailmaterial" "detail/detailsprites"
+	"detailvbsp" "detail.vbsp"
+	"maxpropscreenwidth" "-1"
+	"skyname" "blacksky"
+}
+entity
+{
+	"id" "2"
+	"classname" "asw_objective_triggered"
+	"objectivedescription1" "Download Maintenance Data"
+	"objectivetitle" "Download Maint Data"
+	"targetname" "@objective_download"
+	"Visible" "1"
+	connections
+	{
+		"OnObjectiveComplete" "@extra_objectives_complete_relayTrigger0-1"
+	}
+	"origin" "64 64 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "30"
+	"classname" "env_instructor_hint"
+	"hint_activator_caption" "Downlaod maint data to enable the escape hatch."
+	"hint_allow_nodraw_target" "1"
+	"hint_alphaoption" "0"
+	"hint_caption" "Downlaod maint data to enable the escape hatch."
+	"hint_color" "255 255 255"
+	"hint_forcecaption" "1"
+	"hint_icon_offscreen" "icon_tip"
+	"hint_icon_offset" "0"
+	"hint_icon_onscreen" "icon_tip"
+	"hint_local_player_only" "1"
+	"hint_nooffscreen" "0"
+	"hint_pulseoption" "0"
+	"hint_range" "0"
+	"hint_shakeoption" "0"
+	"hint_static" "1"
+	"hint_timeout" "3"
+	"targetname" "@message_exit_disabled_becaon"
+	"origin" "0 64 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+cameras
+{
+	"activecamera" "-1"
+}
+cordons
+{
+	"active" "0"
+}

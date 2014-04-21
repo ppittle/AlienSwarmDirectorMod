@@ -1,0 +1,21 @@
+"1x1_Corner_SouthWest"
+{
+	"TilesX"		"1"
+	"TilesY"		"1"
+	"RoomTemplateName"		"1x1_Corner_SouthWest"
+	"RoomTemplateCategory"		"Corners"
+	"EXIT"
+	{
+		"xpos"		"0"
+		"ypos"		"0"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+	}
+	"EXIT"
+	{
+		"xpos"		"0"
+		"ypos"		"0"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+	}
+}

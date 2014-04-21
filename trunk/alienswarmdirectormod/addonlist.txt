@@ -1,0 +1,5 @@
+"AddonList"
+{
+	"ExampleAddon"		"0"
+	"DirectorMod"		"1"
+}

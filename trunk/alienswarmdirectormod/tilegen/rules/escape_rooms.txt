@@ -1,0 +1,95 @@
+"rules"
+{	
+	//-----------------------------------------------------------------------------
+	// Random Escape Room
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"PlaceRandomEscapeRoom"
+		"friendly_name"	"Random Escape Room"
+		"description"	"Places a random escape room."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"description"	"Theme from which to choose start rooms."
+			"type"	"theme_name"
+			"source"	"literal|expression"
+			"default"
+			{
+				"rule_instance"
+				{
+					"name"	"GlobalTheme"
+				}
+			}
+		}		
+		"param"
+		{
+			"name"	"$ExitFilters"
+			"friendly_name"	"Exit Filters"
+			"description"	"Additional exit filter criteria."
+			"type"	"exit_filter"
+			"source"	"expression"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		"param"
+		{
+			"name"	"$ConnectorRoomTemplateFilters"
+			"friendly_name"	"Connector Room Template Filters"
+			"description"	"Additional room template filter criteria for connector pieces (if required to place escape room)."
+			"type"	"room_template_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"friendly_name"	"Room Candidate Filters"
+			"description"	"Additional room candidate filter criteria."
+			"type"	"room_candidate_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		} 		
+		"param"
+		{
+			"name"	"$CandidateFilterActions"
+			"friendly_name"	"Candidate Filter Actions"
+			"description"	"Additional actions which can be used to pare down the list of allowed candidates."
+			"type"	"candidate_filter_action"
+			"source"	"expression"
+			"array"	"ordered"
+		}
+		
+		"substitute"
+		{
+			"rule_instance"
+			{
+				"name"	"PlaceRoomReliably"
+				"$Theme"	"$Theme"
+				"$ExitFilters"	"$ExitFilters"
+				"$RoomTemplateFilter"
+				{
+					"class"	"CTilegenExpression_HasTag"
+					"tag"	"Escape"
+					"room_template"
+					{
+						"class"	"var_room_template"
+						"variable"	"RoomTemplate"
+					}
+				}
+				"$ConnectorRoomTemplateFilters"	"$ConnectorRoomTemplateFilters"
+				"$RoomCandidateFilters"	"$RoomCandidateFilters"
+				"$CandidateFilterActions"	"$CandidateFilterActions"
+			}
+		}
+	}
+	
+}

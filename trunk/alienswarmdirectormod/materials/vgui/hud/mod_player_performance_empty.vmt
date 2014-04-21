@@ -1,0 +1,11 @@
+UnlitGeneric
+{
+$basetexture "vgui\hud\mod_player_performance_empty"
+$distancealpha 1
+$softedges 1
+$vertexcolor 1
+$vertexalpha 1
+$ignorez 1
+$translucent 1
+$additive 1
+}

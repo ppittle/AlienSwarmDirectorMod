@@ -1,0 +1,31 @@
+"rooms\5x4_t_junction"
+{
+	"TilesX"		"5"
+	"TilesY"		"4"
+	"SpawnWeight"		"0"
+	"TileType"		"0"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"1"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"4"
+		"YPos"		"1"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"2"
+		"YPos"		"3"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+}

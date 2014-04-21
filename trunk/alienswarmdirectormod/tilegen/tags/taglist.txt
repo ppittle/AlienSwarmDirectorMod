@@ -1,0 +1,22 @@
+taglist
+{
+    "Start"				"This is a start room."
+    "Escape"				"This is an escape room."
+    "Special"				"Only place this room by request, never randomly. Start and Escape rooms are implied to be Special."
+    "Unique"				"This room can only appear once in a particular map."
+    "Chokepoint"			"When this room is placed, all other open exits will be capped, forcing the level to generate from this room onwards."
+    "Border"				"This room is a border piece which should be used to cap off the edge of a tiled level."
+    "Transition"			"This room is an outdoor transition piece which should be placed in the border phase to fill in gaps."
+    "Plug"				"This room can be used to fill in gaps during the border cap process of a tiled level."
+    "Boss"        "When all objectives except for the Escape objective are complete, a boss will spawn in this room."
+    "Treasure"	"Spawn lots of treasure in this room."
+    "Holdout"			"This room contains a holdout/finale."
+    "AlienEncounter"  "This room will be used for fixed aliens spawns."
+    "Resupply"  "This room will be used for health/ammo/respawn stashes."
+    "Combat Arena"    "Combat arena music will play when fighting aliens from spawners in this room"
+    "Egg Room"        "This room contains Alien Eggs"
+    "Data Room"       "This room contains data that must be downloaded"
+    "Fight Room"      "This room contains a large number of spawners"
+    "End Cap"	      "This is a placed to cap an exit."
+    "Exit Goals"      "This is a special room that the player should not see.  It contains the mission goals."
+}

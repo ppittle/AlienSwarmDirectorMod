@@ -1,0 +1,25 @@
+GAME
+{
+	// radar map position and scale (see the Valve wiki for more information: http://developer.valvesoftware.com/wiki/Main_Page)
+	"pos_x"		"0"
+	"pos_y"		"0"
+	"scale"		"20.0"
+
+	// material used for the radar map (in the bottom left corner)
+	"material" 		"vgui/swarm/Computer/ComputerScan"  			// example: "vgui/swarm/Overviews/landingbay02Overview"
+
+	// material used for the briefing map (shown before the mission starts)
+	"briefingmaterial" 	"vgui/swarm/MissionPics/UnknownMissionPic"		// example: "vgui/swarm/Overviews/landingbay02briefingOverview"
+
+	// Title of the mission
+	"missiontitle"		"Mission 1"
+	// Description text shown for the mission
+	"description"		"Fight through the horde and proceed to the exit to gain access to the next mission."
+	
+	// Mission image that shows when selecting this mission
+	"image"			"swarm/MissionPics/UnknownMissionPic"  			//must be under "vgui" - dont include vgui in the path
+
+	"version"		"1.0"
+	"author"		"Philip Pittle"
+	"website"		""
+}

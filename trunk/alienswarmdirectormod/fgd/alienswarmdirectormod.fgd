@@ -1,0 +1,54 @@
+@include "swarm.fgd"
+
+@SolidClass base(trigger_multiple) = mod_dynaimic_difficulty_modifier_trigger: "Fires only if the Marines have reached the Difficulty Threshold"
+[
+	minDifficultyThreshold(integer) : "Minimum Difficulty Threshold" : 1 : "Min Threshold value."
+	maxDifficultyThreshold(integer) : "Maximum Difficulty Threshold" : 3 : "Max Threshold value."
+	maxTriggerFire(integer) : "Maximum Trigger Fire Count" : 1 : "Maximum number of times the trigger will recalculate player performance and fire a set of triggers.  Set to -1 to trigger infinetly"
+
+	output OnTriggerEasy(void) : "Fires if the marine(s) are at an Easy difficulty level."
+	output OnTriggerMedium(void) : "Fires if the marine(s) are at an Medium difficulty level."
+	output OnTriggerHard(void) : "Fires if the marine(s) are at an Hard difficulty level."
+	output OnTriggerAtleastEasy(void) : "Fires if the marine(s) are atleast at an Easy difficulty level. Ie, always fires."
+	output OnTriggerAtleastMedium(void) : "Fires if the marine(s) are atleast at an Medium difficulty level. Ie fires when performance is 2 or 3."
+	output OnTriggerAtleastHard(void) : "Fires if the marine(s) are atleast at an Hard difficulty level.  Ie, fires when performance is 3."
+	input SetMaxFireCount(integer) : "Sets the Max Fire Count and resets the number of times the trigger has fired to 0."
+	
+]
+
+@SolidClass base(trigger_asw_door_area) = mod_dynamic_door_area :
+	"Mod of trigger_asw_door_area that supports difficulty threshold requirements"
+[
+
+	minDifficultyThreshold(integer) : "Minimum Difficulty Threshold" : 1 : "Min Threshold value."
+	maxDifficultyThreshold(integer) : "Maximum Difficulty Threshold" : 3 : "Max Threshold value."
+
+]
+
+@PointClass base(Targetname, ASWObjective) iconsprite("editor/asw_objective_escape.vmt") = mod_objective_escape : 
+	"Alien Swarm Escape Objective"
+[
+    objectivetitle(string) : "Objective Title" : "" : "Title to use for this objective in the list on the briefing screen, or in-game for the current objective HUD display."
+	input MarineInEscapeArea(void) : "MarineInEscapeArea"
+]
+
+@PointClass base(Targetname, EnableDisable) iconsprite("editor/asw_objective_dummy.vmt") = mod_marker : 
+	"Alien Swarm Mission Marker"
+[
+	objectivename(target_destination) : "Objective Name" : "" : "Name of the target object this is associated with."
+	mapwidth(integer) : "Map Width" : 256 : "Size of the map marker in world units."
+	mapheight(integer) : "Map Height" : 256 : "Size of the map marker in world units."
+	
+	input SetComplete(void) : "Mark as complete."
+]
+
+@PointClass base(Targetname) iconsprite("editor/asw_objective_dummy.vmt") = mod_build_mission_map_for_next_mission: 
+	"Builds the mission map for the next mission"
+[	
+	input Activate(void) : "Begins building the mission map for the next mission."
+]
+
+@PointClass base(Targetname, Angles, asw_spawner) studioprop("models/editor/asw_spawner/asw_spawner.mdl") color(0 0 255) = mod_spawner
+[
+	input ResetNumAliens(void) : "Resets the spawner so that it will spawn the number of aliens previously specified in 'Max Num. of live aliens'."	
+]

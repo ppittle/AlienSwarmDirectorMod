@@ -1,0 +1,255 @@
+"rules"
+{	
+	//-----------------------------------------------------------------------------
+	// Specific Room
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"PlaceSpecificRoom"
+		"friendly_name"	"Specific Room"
+		"description"	"Places a specific room."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$RoomName"
+			"friendly_name"	"Room"
+			"description"	"Room template to place."
+			"type"	"room_name"
+			"source"	"literal|expression"
+		}		
+		"param"
+		{
+			"name"	"$ExitFilters"
+			"friendly_name"	"Exit Filters"
+			"description"	"Additional exit filter criteria."
+			"type"	"exit_filter"
+			"source"	"expression"
+			"array"	"unordered"
+			"element_container"	"param"
+		}		
+		"param"
+		{
+			"name"	"$ConnectorRoomTemplateFilters"
+			"friendly_name"	"Connector Room Template Filters"
+			"description"	"Additional room template filter criteria for connector pieces (if required to place room)."
+			"type"	"room_template_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"friendly_name"	"Room Candidate Filters"
+			"description"	"Additional room candidate filter criteria."
+			"type"	"room_candidate_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		} 		
+		"param"
+		{
+			"name"	"$CandidateFilterActions"
+			"friendly_name"	"Candidate Filter Actions"
+			"description"	"Additional actions which can be used to pare down the list of allowed candidates."
+			"type"	"candidate_filter_action"
+			"source"	"expression"
+			"array"	"ordered"
+		}
+		
+		"substitute"
+		{
+			"rule_instance"
+			{
+				"name"	"PlaceRoomReliably"
+				"$Theme"
+				{
+					"class"	"CTilegenExpression_ExtractThemeName"
+					"param"	"$RoomName"
+				}
+				"$ExitFilters" "$ExitFilters"
+				"$RoomTemplateFilter"
+				{
+					"class"		"streq"
+					"param0"
+					{
+						"class"		"CTilegenExpression_RoomName"
+						"param"
+						{
+							"class"		"var_room_template"
+							"variable"		"RoomTemplate"
+						}
+					}
+					"param1"
+					{
+						"class"	"CTilegenExpression_ExtractRoomName"
+						"param"	"$RoomName"
+					}
+				}
+				"$ConnectorRoomTemplateFilters"	"$ConnectorRoomTemplateFilters"
+				"$RoomCandidateFilters"	"$RoomCandidateFilters"
+				"$CandidateFilterActions"	"$CandidateFilterActions"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// [Internal] Place Room Reliably
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"PlaceRoomReliably"
+		"type"	"state"
+		
+		"param"
+		{
+			"name"	"$Theme"
+		}
+		"param"
+		{
+			"name"	"$ExitFilters"
+			"can_omit"	"1"
+		}
+		"param"
+		{
+			"name"	"$RoomTemplateFilter"
+			"can_omit"	"1"
+		}
+		"param"
+		{
+			"name"	"$ConnectorRoomTemplateFilters"
+			"can_omit"	"1"
+		}
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"can_omit"	"1"
+		}
+		"param"
+		{
+			"name"	"$CandidateFilterActions"
+			"can_omit"	"1"
+		}
+		
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"PlaceRoomReliably_%Unique"
+		
+				// Set a flag indicating that we have not placed the room
+				"action"
+				{
+					"class"	"CTilegenAction_SetVariableInt"
+					"variable"	"SuccessfullyPlacedRoom"
+					"value"	"0"
+					"on_begin_state"	"1"
+				}
+				
+				// Switch state once the room has been placed
+				"rule_instance"
+				{
+					"name"		"SwitchState"
+					"$Condition"
+					{
+						"class"	"=="
+						"param0"
+						{
+							"class"	"var_int"
+							"variable"	"SuccessfullyPlacedRoom"
+							"disallow_null"		"0"
+						}
+						"param1"	"1"
+					}
+				}
+				
+				// Add all valid room candidates that match the template filter
+				"action"
+				{
+					"class"	"CTilegenAction_AddRoomCandidates"
+					"theme"	"$Theme"
+					"exit_filter"
+					{
+						"class"	"&&"
+						"_elide"	"$ExitFilters"
+					}
+					"room_template_filter"	"$RoomTemplateFilter"
+					"room_candidate_filter"
+					{
+						"class"	"&&"
+						"_elide"	"$RoomCandidateFilters"
+					}
+					"room_candidate_filter_action"
+					{
+						"class"	"CTilegenAction_NestedActions"
+						"_elide"	"$CandidateFilterActions"
+					}
+				}
+				
+				
+				// Set the "successful flag" to 1, because ChooseRoomCandidate will stop processing actions
+				// if it's successful
+				"action"
+				{
+					"class"	"CTilegenAction_SetVariableInt"
+					"variable"	"SuccessfullyPlacedRoom"
+					"value"	"1"
+				}
+				
+				// Try to pick a candidate
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				
+				// If we get here, we did not successfully place the room
+				"action"
+				{
+					"class"	"CTilegenAction_SetVariableInt"
+					"variable"	"SuccessfullyPlacedRoom"
+					"value"	"0"
+				}
+				
+				// Add as potential candidates any pieces which are normally valid for placement in this theme
+				"action"
+				{
+					"class"	"CTilegenAction_AddConnectorRoomCandidates"
+					"theme"	"$Theme"
+					// This room template filter constrains the room we want to connect to, not the type of
+					// room chosen as a connector (that is constrained by the nested AddRoomCandidates rule)
+					"room_template_filter"	"$RoomTemplateFilter"
+					"connector_room_candidates"
+					{
+						"rule_instance"
+						{
+							"name"	"AddRoomCandidates"
+							"$Theme"	"$Theme"
+							"$ExitFilters"	"$ExitFilters"
+							"$RoomTemplateFilters"	"$ConnectorRoomTemplateFilters"
+							"$RoomCandidateFilters"	"$RoomCandidateFilters"
+							"$CandidateFilterActions"	"$CandidateFilterActions"
+						}
+					}
+				}
+				
+				// Try to pick a connector candidate
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				
+				// If this fails, we're boned
+				"action"
+				{
+					"class"	"CTilegenAction_EpicFail"
+				}
+			}
+		}
+	}
+}

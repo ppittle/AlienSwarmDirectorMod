@@ -1,0 +1,10 @@
+GAME
+{
+"MailFrom1" "From: Philip Pittle"
+"MailDate1" "Date: 04/20/12"
+"MailSubject1" "Subject: Performance 2!"
+"MailBody1A" "Dear Player,"
+"MailBody1B" "This level was built for a Performance of 2.  This is the default level, so the level length with be average and the mission goals will be the default."
+"MailBody1C" "Good luck!"
+"MailBody1D" ""
+}

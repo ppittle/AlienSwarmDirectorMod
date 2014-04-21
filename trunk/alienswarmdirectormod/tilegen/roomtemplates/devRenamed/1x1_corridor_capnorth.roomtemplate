@@ -1,0 +1,14 @@
+"1x1_Corridor_CapNorth"
+{
+	"TilesX"		"1"
+	"TilesY"		"1"
+	"RoomTemplateName"		"1x1_Corridor_CapNorth"
+	"RoomTemplateCategory"		"End-caps"
+	"EXIT"
+	{
+		"xpos"		"0"
+		"ypos"		"0"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+	}
+}

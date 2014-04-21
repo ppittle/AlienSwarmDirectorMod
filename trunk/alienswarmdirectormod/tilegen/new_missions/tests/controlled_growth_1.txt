@@ -1,0 +1,310 @@
+"Mission"
+{
+	"Filename"		"tests\controlled_growth_1.txt"
+	"rule_instance"
+	{
+		"name"		"GlobalOptionBlock"
+		"$MissionName"		"Mission 2"
+		"$MissionDescription"		"Download Maint Data - Med"
+		"$GlobalTheme"		"mod"
+	}
+	"name"		"Mission 2"
+	"rule_instance"
+	{
+		"name"		"PlaceStartRoom"
+		"$RoomName"		"mod\start_area\2x3_start_area_hard"
+		"$X"		"60"
+		"$Y"		"60"
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"90"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomTemplateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Caps"
+				}
+			}
+		}
+		"$ExitFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowSouthGrowing"
+				}
+			}
+		}
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\6x3_ruined_lab"
+						"$Fraction"		"0.200000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\rooms\4x5_t_junction"
+						"$Fraction"		"0.15000"
+					}
+				}
+				"$OptionalRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\8x7_utilityroom_ew"
+						"$Fraction"		"0.6"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\6x11_break_room"
+						"$Fraction"		"0.5"
+					}
+				}
+				"$MinOptionalRooms"		"1"
+				"$MaxOptionalRooms"		"1"
+			}
+		}
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"Egg Room"
+				}
+			}
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Cap"
+				}
+			}
+		}
+		"$CandidateFilterActions"
+		{
+			"rule_instance"
+			{
+				"name"		"LinearGrowth"
+				"$Threshold"		"10"
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"60"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomTemplateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Caps"
+				}
+			}
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"Disallow1x1"
+				}
+			}
+		}
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\download_data_rooms\3x5_download_data_maint_hallway"
+						"$Fraction"		"0.7"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\resupply_rooms\1x2_resupply_corridor_ns"
+						"$Fraction"		"0.6"
+					}
+				}
+			}
+		}
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Caps"
+				}
+			}
+		}
+		"$CandidateFilterActions"
+		{
+			"rule_instance"
+			{
+				"name"		"LinearGrowth"
+				"$Threshold"		"10"
+			}
+		}
+		"disabled"		"1"
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"60"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomTemplateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Caps"
+				}
+			}
+		}
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Caps"
+				}
+			}
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"Disallow1x1"
+				}
+			}
+		}
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MinOptionalRooms"		"1"
+				"$MaxOptionalRooms"		"1"
+				"$OptionalRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\8x7_utilityroom_nw"
+						"$Fraction"		"0.7"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\8x7_utilityroom_ew"
+						"$Fraction"		"0.6"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\6x11_break_room"
+						"$Fraction"		"0.5"
+					}
+				}
+			}
+		}
+		"$CandidateFilterActions"
+		{
+			"rule_instance"
+			{
+				"name"		"LinearGrowth"
+				"$Threshold"		"10"
+			}
+		}
+		"disabled"		"1"
+	}
+	"rule_instance"
+	{
+		"name"		"PlaceRandomEscapeRoom"
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"SpecificRoom"
+					"$RoomName"		"mod\exit\7x8_exit_dynamic"
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"1"
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\exit_goals\1x1_exit_goals_download_maint_data"
+						"$Fraction"		"0.1"
+					}
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"CapLevel"
+	}
+}

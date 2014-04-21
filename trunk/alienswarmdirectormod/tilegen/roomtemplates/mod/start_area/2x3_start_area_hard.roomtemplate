@@ -1,0 +1,43 @@
+"start_area\2x3_start_area_hard"
+{
+	"TilesX"		"2"
+	"TilesY"		"3"
+	"SpawnWeight"		"0"
+	"TileType"		"3735611"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"0"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"0"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"Tags"
+	{
+		"tag"		"Start"
+	}
+}

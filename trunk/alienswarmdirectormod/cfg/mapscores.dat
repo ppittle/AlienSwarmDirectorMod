@@ -1,0 +1,63 @@
+"MAPSCORES"
+{
+	"MAPENTRY"
+	{
+		"MapName"		"output"
+		"BestTimeNormal"		"43.833332"
+		"BestKillsNormal"		"210"
+		"VariationsUnlocked"		"6"
+		"BestTimeEasy"		"51.516670"
+		"BestKillsEasy"		"228"
+	}
+	"MAPENTRY"
+	{
+		"MapName"		"dynamicdoorcontrol"
+		"BestTimeNormal"		"13.883335"
+		"BestKillsNormal"		"0"
+		"VariationsUnlocked"		"6"
+	}
+	"MAPENTRY"
+	{
+		"MapName"		"asi-jac1-landingbay_pract"
+		"BestTimeNormal"		"377.583374"
+		"BestKillsNormal"		"340"
+		"VariationsUnlocked"		"4"
+	}
+	"MAPENTRY"
+	{
+		"MapName"		"example_map_1"
+		"BestTimeNormal"		"93.116669"
+		"BestKillsNormal"		"0"
+		"VariationsUnlocked"		"0"
+	}
+	"MAPENTRY"
+	{
+		"MapName"		"mission1"
+		"BestTimeEasy"		"51.566669"
+		"BestKillsEasy"		"33"
+		"VariationsUnlocked"		"0"
+		"BestTimeNormal"		"54.166668"
+		"BestKillsNormal"		"41"
+	}
+	"MAPENTRY"
+	{
+		"MapName"		"mission2"
+		"BestTimeNormal"		"166.350006"
+		"BestKillsNormal"		"22"
+		"VariationsUnlocked"		"0"
+	}
+	"MAPENTRY"
+	{
+		"MapName"		"mission3"
+		"BestTimeNormal"		"218.283340"
+		"BestKillsNormal"		"41"
+		"VariationsUnlocked"		"0"
+	}
+	"MAPENTRY"
+	{
+		"MapName"		"mission4"
+		"BestTimeNormal"		"146.933350"
+		"BestKillsNormal"		"34"
+		"VariationsUnlocked"		"0"
+	}
+}

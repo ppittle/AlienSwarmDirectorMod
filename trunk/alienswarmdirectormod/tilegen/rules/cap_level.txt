@@ -1,0 +1,140 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	// Cap Level
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"CapLevel"
+		"friendly_name"	"Cap Level"
+		"description"	"Closes off open exits in the level."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"description"	"Theme to use for level capping pieces."
+			"type"	"theme_name"
+			"source"	"literal|expression"
+			"default"
+			{
+				"rule_instance"
+				{
+					"name"	"GlobalTheme"
+				}
+			}
+		}
+		
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"CapLevel_%Unique"
+				
+				"rule_instance"
+				{
+					"name"	"CapLevelInternal"
+					"$Theme"	"$Theme"
+				}				
+				
+				"action"
+				{
+					"class"		"CTilegenAction_SwitchState"
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"CapLevelInternal"
+		"type"	"action"
+
+		"param"
+		{
+			"name"	"$ExitFilter"
+			"friendly_name"	"Exit Filter"
+			"description"	"An optional filter which can limit the exits that are capped."
+			"type"	"exit_filter"
+			"can_omit"	"1"
+		}
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"description"	"Theme to use for level capping pieces."
+			"type"	"theme_name"
+			"source"	"literal|expression"
+			"default"
+			{
+				"rule_instance"
+				{
+					"name"	"GlobalTheme"
+				}
+			}
+		}
+		
+		"param"
+		{
+			"name"	"$StopProcessing"
+			"friendly_name"	"Stop processing if chosen."
+			"description"	"Stops processing further rules in this state for the current iteration if a valid room is chosen (default: yes)."
+			"default"	"1"
+			"type"	"bool"
+			"source"	"literal"
+		}
+				
+		"substitute"
+		{
+			"action"
+			{
+				"class"		"CTilegenAction_AddRoomCandidates"
+				"theme"	"$Theme"
+				"exit_filter"	"$ExitFilter"
+				"room_template_filter"
+				{
+					"class"	"&&"
+					"param"
+					{
+						"class"	"CTilegenExpression_CanPlaceRandomly"
+						"room_template"
+						{
+							"class"		"var_room_template"
+							"variable"		"RoomTemplate"
+						}
+					}
+					"param"
+					{
+						"rule_instance"
+						{
+							"name"	"UniqueRooms"
+						}
+					}
+				}
+				"room_candidate_filter"
+				{
+					"class"		"=="
+					"param0"		"0"
+					"param1"
+					{
+						"rule_instance"
+						{
+							"name"		"CountNewOpenExits"
+						}
+					}
+				}
+				"exclude_global_filters"	"1"
+			}
+			"rule_instance"
+			{
+				"name"	"ChooseRandomCandidate"
+				"$StopProcessing"	"$StopProcessing"
+			}
+		}
+	}	
+}

@@ -1,0 +1,19 @@
+"start_area\26x14_landing_bay_start_area"
+{
+	"TilesX"		"19"
+	"TilesY"		"14"
+	"SpawnWeight"		"0"
+	"TileType"		"3735611"	
+	"Tags"
+	{
+		"tag"		"Start"
+	}
+	"EXIT"
+	{
+		"XPos"		"7"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+}

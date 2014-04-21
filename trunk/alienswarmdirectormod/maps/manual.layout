@@ -1,0 +1,75 @@
+"mapmisc"
+{
+	"PlayerStartX"		"60"
+	"PlayerStartY"		"60"
+}
+"room"
+{
+	"posx"		"61"
+	"posy"		"40"
+	"theme"		"mod"
+	"template"		"start_area\2x3_start_area"
+}
+"room"
+{
+	"posx"		"61"
+	"posy"		"43"
+	"theme"		"mod"
+	"template"		"mod_corridors\1x4_corridor_door_hard"
+}
+"room"
+{
+	"posx"		"61"
+	"posy"		"47"
+	"theme"		"mod"
+	"template"		"mod_corridors\1x4_corridor_door_easy"
+}
+"room"
+{
+	"posx"		"63"
+	"posy"		"42"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_e"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"42"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_w"
+}
+"room"
+{
+	"posx"		"62"
+	"posy"		"43"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_n"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"51"
+	"theme"		"mod"
+	"template"		"exit\7x8_exit_escapeOnly"
+}
+"room"
+{
+	"posx"		"67"
+	"posy"		"52"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_e"
+}
+"room"
+{
+	"posx"		"59"
+	"posy"		"52"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_w"
+}
+"room"
+{
+	"posx"		"65"
+	"posy"		"50"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap_s"
+}

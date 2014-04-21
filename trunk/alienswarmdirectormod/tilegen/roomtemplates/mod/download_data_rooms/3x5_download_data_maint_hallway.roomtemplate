@@ -1,0 +1,20 @@
+"download_data_rooms\3x5_download_data_maint_hallway"
+{
+	"TilesX"		"3"
+	"TilesY"		"5"
+	"SpawnWeight"		"0"
+	"TileType"		"0"	
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"4"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}	
+	"Tags"
+	{	
+		"tag"		"Special"
+		"tag"		"Data Room"
+	}
+}

@@ -1,0 +1,62 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"AtLeastNTilesPlaced"
+		"friendly_name"	">= N Tiles Placed (Total)"
+		"description"	"This condition is true when at least N tiles (total area) have been placed in total."
+		"type"	"bool"
+		
+		"param"
+		{
+			"name"	"$N"
+			"friendly_name"	"Number of Tiles"
+			"type"	"int"
+			"source"	"literal|expression"
+		}
+		
+		"substitute"
+		{
+			"class"		">="
+			"param0"
+			{
+				"class"		"var_int"
+				"variable"		"NumTilesPlaced"
+				"disallow_null"	"0"
+			}
+			"param1"		"$N"
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"AtLeastNTilesPlacedThisStep"
+		"friendly_name"	">= N Tiles Placed (This Step)"
+		"description"	"This condition is true when at least N tiles (total area) have been placed in this generation step."
+		"type"	"bool"
+		
+		"param"
+		{
+			"name"	"$N"
+			"friendly_name"	"Number of Tiles"
+			"type"	"int"
+			"source"	"literal|expression"
+		}
+		
+		"substitute"
+		{
+			"class"		">="
+			"param0"
+			{
+				"class"		"var_int"
+				"variable"		"NumTilesPlacedThisState"
+				"disallow_null"	"0"
+			}
+			"param1"		"$N"
+		}
+	}
+}

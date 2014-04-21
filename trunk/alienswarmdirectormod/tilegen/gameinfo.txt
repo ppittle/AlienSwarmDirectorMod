@@ -1,0 +1,13 @@
+"GameInfo"
+{
+	FileSystem
+	{
+		SteamAppId				220 // mount hl2 content for vgui platform stuff
+		
+		SearchPaths
+		{
+			vconfig				|gameinfo_path|.	// for all the tilegen stuff
+			vconfig				platform			// for all the vgui stuff
+		}
+	}
+}

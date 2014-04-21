@@ -1,0 +1,45 @@
+"fight_rooms\8x7_utilityRoom_ew"
+{
+	"TilesX"		"8"
+	"TilesY"		"7"
+	"SpawnWeight"		"0"
+	"TileType"		"151587341"
+	"EXIT"
+	{
+		"XPos"		"2"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"1"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"3"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"1"
+	}
+	"EXIT"
+	{
+		"XPos"		"3"
+		"YPos"		"6"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"7"
+		"YPos"		"3"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"Tags"
+	{
+		"tag"		"Fight Room"
+		"tag"		"Special"
+		"tag"		"Chokepoint"
+	}
+}

@@ -1,0 +1,22 @@
+"2x2_Room3_FuncDetail"
+{
+	"TilesX"		"2"
+	"TilesY"		"2"
+	"RoomTemplateName"		"2x2_Room3_FuncDetail"
+	"RoomTemplateCategory"		"Rooms"
+	"RoomTemplateDescription"		"Func detail in the middle of the room"
+	"EXIT"
+	{
+		"xpos"		"1"
+		"ypos"		"0"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+	}
+	"EXIT"
+	{
+		"xpos"		"0"
+		"ypos"		"1"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+	}
+}

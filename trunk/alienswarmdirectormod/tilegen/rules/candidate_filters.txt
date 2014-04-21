@@ -1,0 +1,528 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	// Disallow South Growing
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"DisallowSouthGrowing"
+		"friendly_name"	"Disallow South Growing"
+		"description"	"Do not allow growing new rooms from south-facing exits of the level."
+		"type"	"exit_filter"
+		"hidden"	"0"
+		
+		"substitute"
+		{
+			"class"		"!="
+			"param0"
+			{
+				"class"		"CTilegenExpression_ExitDirection"
+				"param"
+				{
+					"class"		"var_exit"
+					"variable"		"Exit"
+				}
+			}
+			"param1"		"2"
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Disallow Exit Tag
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"DisallowExitTag"
+		"friendly_name"	"Disallow Exit Tag"
+		"description"	"Disallow growing from exits with a given tag."
+		"type"	"exit_filter"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Tag"
+			"friendly_name"	"Tag"
+			"description"	"The name of the tag to disallow."
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"substitute"
+		{
+			"class"		"!streq"
+			"param0"
+			{
+				"class"	"CTilegenExpression_ExitTag"
+				"param"
+				{
+					"class"		"var_exit"
+					"variable"		"Exit"
+				}
+			}
+			"param1"	"$Tag"
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Disallow 1x1
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"Disallow1x1"
+		"friendly_name"	"Disallow 1x1 Rooms"
+		"description"	"Do not allow 1x1 rooms to be chosen."
+		"type"	"room_template_filter|room_candidate_filter"
+		"hidden"	"0"
+		
+		"substitute"
+		{
+			"class"		"!="
+			"param0"
+			{
+				"class"		"CTilegenExpression_RoomArea"
+				"param"
+				{
+					"class"		"var_room_template"
+					"variable"		"RoomTemplate"
+				}
+			}
+			"param1"		"1"
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"CountNewOpenExits"
+		"friendly_name"	"# of New Exits"
+		"description"	"Counts the number of new open exits if a room were to be placed."
+		"type"	"int"
+		
+		"substitute"
+		{
+			"class"		"CTilegenExpression_CountExits"
+			"range"
+			{
+				"class"		"CTilegenRange_NewOpenExits"
+				"expression"
+				{
+					"class"		"var_room_candidate"
+					"variable"		"RoomCandidate"
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"CountClosedExits"
+		"friendly_name"	"# of Closed Exits"
+		"description"	"Counts the number of closed exits if a room were to be placed."
+		"type"	"int"
+		
+		"substitute"
+		{
+			"class"		"CTilegenExpression_CountExits"
+			"range"
+			{
+				"class"		"CTilegenRange_ClosedExits"
+				"expression"
+				{
+					"class"		"var_room_candidate"
+					"variable"		"RoomCandidate"
+				}
+			}
+		}
+	}
+		
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"CloseAtLeastNExits"
+		"friendly_name"	"Close >= N exits"
+		"description"	"Room candidates must close at least N exits of a particular type."
+		"type"	"room_candidate_filter"
+		
+		"param"
+		{
+			"name"	"$N"
+			"friendly_name"	"N"
+			"description"	"Number of exits to close"
+			"type"	"int"
+			"source"	"literal|expression"
+		}
+		
+		"param"
+		{
+			"name"	"$ExitTag"
+			"friendly_name"	"Exit tag"
+			"description"	"At least N exits with this tag must be closed."
+			"type"	"string"
+			"source"	"literal|expression"
+		}
+		
+		"substitute"
+		{
+			"class"		">="
+			"param0"
+			{
+				"class"		"CTilegenExpression_MapReduceExits"
+				"range"
+				{
+					"class"		"CTilegenRange_ClosedExits"
+					"expression"
+					{
+						"class"		"var_room_candidate"
+						"variable"		"RoomCandidate"
+					}
+				}
+				"iterator"		"exit_iterator"
+				"map"
+				{
+					"class"		"CTilegenExpression_BoolToInt"
+					"param"
+					{
+						"class"		"streq"
+						"param0"
+						{
+							"class"		"CTilegenExpression_ExitTag"
+							"param"
+							{
+								"class"		"var_exit"
+								"variable"		"exit_iterator"
+							}
+						}
+						"param1"		"$ExitTag"
+					}
+				}
+				"reduce"
+				{
+					"class"		"+"
+				}
+			}
+			"param1"		"$N"
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Disallow Room Tag
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"DisallowRoomTag"
+		"friendly_name"	"Disallow Room Tag"
+		"description"	"Disallow room templates with a given tag."
+		"type"	"room_template_filter|room_candidate_filter"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Tag"
+			"friendly_name"	"Tag"
+			"description"	"The name of the tag to disallow."
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"substitute"
+		{
+			"class"		"!"
+			"param"
+			{
+				"class"		"CTilegenExpression_HasTag"
+				"tag"		"$Tag"
+				"room_template"
+				{
+					"class"		"var_room_template"
+					"variable"		"RoomTemplate"
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Specific Room
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"SpecificRoom"
+		"friendly_name"	"Specific Room"
+		"description"	"Pick a specific room template."
+		"type"	"room_template_filter|room_candidate_filter"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$RoomName"
+			"friendly_name"	"Room"
+			"description"	"Room template to use as an exit."
+			"type"	"room_name"
+			"source"	"literal|expression"
+		}		
+				
+		"substitute"
+		{
+			"class"		"streq"
+			"param0"
+			{
+				"class"		"CTilegenExpression_RoomName"
+				"param"
+				{
+					"class"		"var_room_template"
+					"variable"		"RoomTemplate"
+				}
+			}
+			"param1"
+			{
+				"class"	"CTilegenExpression_ExtractRoomName"
+				"param"	"$RoomName"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Allow Room Tag
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"AllowRoomTag"
+		"friendly_name"	"Allow Room Tag"
+		"description"	"Only allow room templates with a given tag."
+		"type"	"room_template_filter|room_candidate_filter"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Tag"
+			"friendly_name"	"Tag"
+			"description"	"The name of the tag to allow."
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"substitute"
+		{
+			"class"		"CTilegenExpression_HasTag"
+			"tag"		"$Tag"
+			"room_template"
+			{
+				"class"		"var_room_template"
+				"variable"		"RoomTemplate"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Linear Growth
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"LinearGrowth"
+		"friendly_name"	"Linear Growth"
+		"description"	"Pick only those room candidates which grow off of the last placed room(s)."
+		"type"	"candidate_filter_action"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Threshold"
+			"friendly_name"	"Threshold"
+			"description"	"Number of rooms within the last placed room to allow growth from.  If set to -1, picks the best possible candidates."
+			"type"	"int"
+			"default"	"-1"
+			"source"	"literal|expression"
+		}
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"	"CTilegenAction_FilterCandidatesForLinearGrowth"
+				"threshold"	"$Threshold"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Pares down the list of candidates to those within N units of the northmost
+	// position.
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"FilterNorthmostCandidates"
+		"friendly_name"	"Filter Northmost Candidates"
+		"description"	"Removes all but the northmost room candidates from the candidate list."
+		"type"	"candidate_filter_action"
+		"hidden"	"0"
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"	"CTilegenAction_FilterCandidatesByDirection"
+				"direction"	"north"
+				"threshold"	"5"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Unique Rooms
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"UniqueRooms"
+		"friendly_name"	"Unique Rooms"
+		"description"	"Enforce that rooms tagged 'Unique' get placed only once."
+		"type"	"room_template_filter"
+		"hidden"	"0"
+		
+		// Pick a room template if it is not marked as unique or it has never been placed
+		"substitute"
+		{
+			"class"	"||"
+			"param"
+			{
+				"class"	"!"
+				"param"
+				{
+					"class"	"CTilegenExpression_HasTag"
+					"tag"	"Unique"
+					"room_template"
+					{
+						"class"	"var_room_template"
+						"variable"	"RoomTemplate"
+					}
+				}
+			}
+			"param"
+			{
+				"class"	"=="
+				"param0"
+				{
+					"class"	"CTilegenExpression_NumTimesPlaced"
+					"param"
+					{
+						"class"	"var_room_template"
+						"variable"	"RoomTemplate"
+					}
+				}
+				"param1"	"0"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Within Bounds
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"WithinBounds"
+		"friendly_name"	"Within Bounds"
+		"description"	"Enforce that the lower-left corner of placed rooms are within specified bounds."
+		"type"	"room_candidate_filter"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	 "$MinX"
+			"friendly_name"	"Min X"
+			"description"	"Minimum X value"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"0"
+		}		
+		"param"
+		{
+			"name"	 "$MinY"
+			"friendly_name"	"Min Y"
+			"description"	"Minimum Y value"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"0"
+		}		
+		"param"
+		{
+			"name"	 "$MaxX"
+			"friendly_name"	"Max X"
+			"description"	"Maximum X value"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"120"
+		}
+		"param"
+		{
+			"name"	 "$MaxY"
+			"friendly_name"	"Max Y"
+			"description"	"Maximum Y value"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"120"
+		}
+		
+		"substitute"
+		{
+			"class"	"&&"
+			"param"
+			{
+				"class"	">="
+				"param0"
+				{
+					"class"	"CTilegenExpression_XPosition"
+					"param"
+					{
+						"class"	"var_room_candidate"
+						"variable"	"RoomCandidate"
+					}
+				}
+				"param1"	"$MinX"
+			}
+			"param"
+			{
+				"class"	"<="
+				"param0"
+				{
+					"class"	"CTilegenExpression_XPosition"
+					"param"
+					{
+						"class"	"var_room_candidate"
+						"variable"	"RoomCandidate"
+					}
+				}
+				"param1"	"$MaxX"
+			}
+			"param"
+			{
+				"class"	">="
+				"param0"
+				{
+					"class"	"CTilegenExpression_YPosition"
+					"param"
+					{
+						"class"	"var_room_candidate"
+						"variable"	"RoomCandidate"
+					}
+				}
+				"param1"	"$MinY"
+			}
+			"param"
+			{
+				"class"	"<="
+				"param0"
+				{
+					"class"	"CTilegenExpression_YPosition"
+					"param"
+					{
+						"class"	"var_room_candidate"
+						"variable"	"RoomCandidate"
+					}
+				}
+				"param1"	"$MaxY"
+			}
+		}
+	}
+}

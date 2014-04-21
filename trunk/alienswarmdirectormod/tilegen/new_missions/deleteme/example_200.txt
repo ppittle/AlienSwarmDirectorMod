@@ -1,0 +1,105 @@
+"Mission"
+{
+	"Filename"		"example_200.txt"
+	"rule_instance"
+	{
+		"name"		"GlobalOptionBlock"
+		"$MissionName"		"Example 200"
+		"$MissionDescription"		"Randomly generated example mission."
+		"$GlobalTheme"		"example"
+	}
+	"name"		"Example 200"
+	"rule_instance"
+	{
+		"name"		"PlaceRandomStartRoom"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"180"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomTemplateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"Disallow1x1"
+				}
+			}
+		}
+		"$ExitFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowSouthGrowing"
+				}
+			}
+		}
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"example\rooms\3x5_chokepoint"
+						"$Fraction"		"0.600000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"example\corridors\1x4_corridor_door"
+						"$Fraction"		"0.300000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"example\rooms\5x5_office_crossing"
+						"$Fraction"		"0.400000"
+					}
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"PlaceRandomEscapeRoom"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"CapLevel"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+	}
+}

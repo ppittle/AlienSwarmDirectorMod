@@ -1,0 +1,27 @@
+"end_caps\1x1_endcap_wn"
+{
+	"TilesX"		"1"
+	"TilesY"		"1"
+	"SpawnWeight"		"0"
+	"TileType"		"3735611"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"0"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"Tags"
+	{
+		"tag"		"End Cap"
+	}
+}

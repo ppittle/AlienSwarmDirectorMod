@@ -1,0 +1,7 @@
+UnlitGeneric
+{
+$basetexture "console\asdm_startup_loading"
+$vertexcolor 1
+$vertexalpha 1
+$ignorez 1
+}

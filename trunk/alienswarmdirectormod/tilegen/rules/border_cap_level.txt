@@ -1,0 +1,510 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	// Cap a level with 'Border' pieces.
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"BorderCapLevel"
+		"friendly_name"	"Border Cap Level"
+		"description"	"Attempts to form a seamless edge around a level using room tiles tagged with 'Border'. Several conditions must be met for this to work properly; e.g. exits in the core of the level must be tagged with [Exit Tag to Cap] (default: 'center'), there must be sufficient variety of 'Border' pieces to create a seamless edge, tiles in the center should all be the same size, etc.."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$ExitTagToCap"
+			"friendly_name"	"Exit Tag to Cap"
+			"description"	"The exit tag which interfaces between the inside of the level and the border cap (default: 'center')."
+			"type"	"string"
+			"default"	"center"
+			"source"	"literal"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"friendly_name"	"Room Candidate Filters"
+			"description"	"Additional room candidate filter criteria for placing border tiles."
+			"type"	"room_candidate_filter"
+			"source"	"expression"
+			"array"	"unordered"
+			"element_container"	"param"
+			"default"
+			{
+				"param"
+				{
+					"rule_instance"
+					{
+						"name"	"DisallowNewCenterExits"
+						"$DisallowedTag"	"center"
+					}
+				}
+			}
+		}
+		
+		"substitute"
+		{
+			// Phase 1: fill in any gaps in the existing level by placing
+			// tiles in any place where they would create only 1 new exit (applies
+			// only if the room template has at least 4 exits).
+			// This my cause an infinite loop if the tile set is not built properly.
+			"state"
+			{
+				"name"		"FillInGaps_%Unique"
+				"action"
+				{
+					"class"		"CTilegenAction_AddRoomCandidates"					
+					"Theme"
+					{
+						"rule_instance"
+						{
+							"name"	"GlobalTheme"
+						}
+					}					
+					"room_template_filter"
+					{
+						"class"	"&&"
+						"param"
+						{
+							"class"	"CTilegenExpression_CanPlaceRandomly"
+							"room_template"
+							{
+								"class"		"var_room_template"
+								"variable"		"RoomTemplate"
+							}
+						}
+						"param"
+						{
+							"class"	"!"
+							"param"
+							{
+								"class"	"CTilegenExpression_HasTag"
+								"tag"	"Border"
+								"room_template"
+								{
+									"class"		"var_room_template"
+									"variable"		"RoomTemplate"
+								}
+							}
+						}
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"	"UniqueRooms"
+							}
+						}
+					}
+					"room_candidate_filter"
+					{
+						"class"		">"
+						"param0"
+						{
+							"rule_instance"
+							{
+								"name"		"CountClosedExits"
+							}
+						}
+						"param1"
+						{
+							"rule_instance"
+							{
+								"name"		"CountNewOpenExits"
+							}
+						}
+					}
+					"exclude_global_filters"	"1"
+				}
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				"action"
+				{
+					"class"		"CTilegenAction_SwitchState"
+				}
+			}
+			
+			// Phase 2: cap off any corners where a 'Border' piece would close 2 inner exits.
+			"state"
+			{
+				"name"		"BorderTiles_InnerCorner_%Unique"
+				"action"
+				{
+					"class"		"CTilegenAction_AddRoomCandidates"					
+					"Theme"
+					{
+						"rule_instance"
+						{
+							"name"	"GlobalTheme"
+						}
+					}					
+					"exit_filter"
+					{
+						"rule_instance"
+						{
+							"name"		"GrowFromCenter"
+							"$GrowFromTag"	"$ExitTagToCap"
+						}
+					}
+					"room_template_filter"
+					{
+						"class"	"&&"
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"		"AllowBorderNonTransitionRoomTemplates"
+							}
+						}
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"	"UniqueRooms"
+							}
+						}
+					}
+					"room_candidate_filter"
+					{
+						"class"		"&&"
+						"_elide"	"$RoomCandidateFilters"
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"		"CloseAtLeastNExits"
+								"$N"		"2"
+								"$ExitTag"		"$ExitTagToCap"
+							}
+						}
+					}
+					"exclude_global_filters"	"1"
+				}
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				"action"
+				{
+					"class"		"CTilegenAction_SwitchState"
+				}
+			}
+			
+			// Phase 3: grow from the edge of the map, placing 'Border' pieces 
+			"state"
+			{
+				"name"		"BorderTiles_Edge_%Unique"
+				"action"
+				{
+					"class"		"CTilegenAction_AddRoomCandidates"					
+					"Theme"
+					{
+						"rule_instance"
+						{
+							"name"	"GlobalTheme"
+						}
+					}					
+					"exit_filter"
+					{
+						"rule_instance"
+						{
+							"name"		"GrowFromCenter"
+							"$GrowFromTag"	"$ExitTagToCap"
+						}
+					}
+					"room_template_filter"
+					{
+						"class"	"&&"
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"		"AllowBorderNonTransitionRoomTemplates"
+							}
+						}
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"	"UniqueRooms"
+							}
+						}
+					}
+					"room_candidate_filter"
+					{
+						"class"	"&&"
+						"_elide"	"$RoomCandidateFilters"
+					}
+					"exclude_global_filters"	"1"
+				}
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				"action"
+				{
+					"class"		"CTilegenAction_SwitchState"
+				}
+			}
+			
+			// Phase 4: plug any border gaps with transition pieces.
+			"state"
+			{
+				"name"		"BorderTiles_Transition_%Unique"
+				"action"
+				{
+					"class"		"CTilegenAction_AddRoomCandidates"					
+					"Theme"
+					{
+						"rule_instance"
+						{
+							"name"	"GlobalTheme"
+						}
+					}					
+					"exit_filter"
+					{
+						"rule_instance"
+						{
+							"name"		"GrowFromCenter"
+							"$GrowFromTag"	"$ExitTagToCap"
+						}
+					}
+					"room_template_filter"
+					{
+						"class"	"&&"
+						"param"
+						{
+							"class"		"CTilegenExpression_HasTag"
+							"tag"	"border"
+							"room_template"
+							{
+								"class"		"var_room_template"
+								"variable"		"RoomTemplate"
+							}
+						}
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"	"UniqueRooms"
+							}
+						}
+					}
+					"room_candidate_filter"
+					{
+						"class"	"&&"
+						"_elide"	"$RoomCandidateFilters"
+					}
+					"exclude_global_filters"	"1"
+				}
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				"action"
+				{
+					"class"		"CTilegenAction_SwitchState"
+				}
+			}
+			
+			// Phase 5: fill in outer corners so you can't see off the edge of the world.
+			// The only places where you can connect outer-corner pieces are other 'Border' pieces.
+			"state"
+			{
+				"name"		"BorderTiles_OuterCorner_%Unique"
+				"action"
+				{
+					"class"		"CTilegenAction_AddRoomCandidates"
+					"Theme"
+					{
+						"rule_instance"
+						{
+							"name"	"GlobalTheme"
+						}
+					}
+					"room_template_filter"
+					{
+						"class"	"&&"
+						"param"
+						{
+							"class"		"CTilegenExpression_HasTag"
+							"tag"	"border"
+							"room_template"
+							{
+								"class"		"var_room_template"
+								"variable"		"RoomTemplate"
+							}
+						}
+						"param"
+						{
+							"rule_instance"
+							{
+								"name"	"UniqueRooms"
+							}
+						}
+					}
+					"room_candidate_filter"
+					{
+						"class"		"=="
+						"param0"		"0"
+						"param1"
+						{
+							"rule_instance"
+							{
+								"name"		"CountNewOpenExits"
+							}
+						}
+					}
+					"exclude_global_filters"	"1"
+				}
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				"action"
+				{
+					"class"		"CTilegenAction_SwitchState"
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Allow room templates with the 'Border' tag but without the 'Transition' tag.
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"AllowBorderNonTransitionRoomTemplates"
+		"friendly_name"	"Allow Border, Non-Transition Rooms"
+		"description"	"Allow rooms with the 'Border' tag but without the 'Transition' tag."
+		"type"	"room_template_filter"
+		
+		"substitute"
+		{
+			"class"		"&&"
+			"param"
+			{
+				"class"		"CTilegenExpression_HasTag"
+				"tag"		"Border"
+				"room_template"
+				{
+					"class"		"var_room_template"
+					"variable"		"RoomTemplate"
+				}
+			}
+			"param"
+			{
+				"class"		"!"
+				"param"
+				{
+					"class"		"CTilegenExpression_HasTag"
+					"tag"		"Transition"
+					"room_template"
+					{
+						"class"		"var_room_template"
+						"variable"		"RoomTemplate"
+					}
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Disallow exits from rooms with the 'Border' tag.
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"GrowFromCenter"
+		"type"	"exit_filter"
+		
+		"param"
+		{
+			"name"	"$GrowFromTag"
+		}
+		
+		"substitute"
+		{
+			"class"	"streq"
+			"param0"
+			{
+				"class"	"CTilegenExpression_ExitTag"
+				"param"
+				{
+					"class"		"var_exit"
+					"variable"		"Exit"
+				}
+			}
+			"param1"	"$GrowFromTag"
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Disallow room candidates which would create new center exits.
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"DisallowNewCenterExits"
+		"friendly_name"	"Disallow New Exits Tagged"
+		"description"	"Do not allow rooms to be placed that would create new exits with this tag."
+		"type"	"room_candidate_filter"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$DisallowedTag"
+			"friendly_name"	"Disallow Tag"
+			"description"	"Tag to disallow."
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"substitute"
+		{
+			"class"		"=="
+			"param0"		"0"
+			"param1"
+			{
+				"class"		"CTilegenExpression_MapReduceExits"
+				"range"
+				{
+					"class"		"CTilegenRange_NewOpenExits"
+					"expression"
+					{
+						"class"		"var_room_candidate"
+						"variable"		"RoomCandidate"
+					}
+				}
+				"iterator"		"exit_iterator"
+				"map"
+				{
+					"class"		"CTilegenExpression_BoolToInt"
+					"param"
+					{
+						"class"		"streq"
+						"param0"
+						{
+							"class"		"CTilegenExpression_ExitTag"
+							"param"
+							{
+								"class"		"var_exit"
+								"variable"		"exit_iterator"
+							}
+						}
+						"param1"		"$DisallowedTag"
+					}
+				}
+				"reduce"
+				{
+					"class"		"+"
+				}
+			}
+		}
+	}
+}

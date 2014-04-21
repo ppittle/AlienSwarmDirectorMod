@@ -1,0 +1,324 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	// Start Room
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"PlaceStartRoom"
+		"friendly_name"	"Place [Start] Room at Location"
+		"description"	"Places a given room at a specified location, default: (60, 20)."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$RoomName"
+			"friendly_name"	"Room"
+			"description"	"Starting room template to place."
+			"type"	"room_name"
+			"source"	"literal|expression"
+		}
+		
+		"param"
+		{
+			"name"	"$X"
+			"friendly_name"	"X"
+			"description"	"X coordinate."
+			"type"	"int"
+			"source"	"literal"
+			"default"	"60"
+		}
+		
+		"param"
+		{
+			"name"	"$Y"
+			"friendly_name"	"Y"
+			"description"	"Y coordinate."
+			"type"	"int"
+			"source"	"literal"
+			"default"	"20"
+		}
+		
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"PlaceStartRoom_%Unique"
+		
+				"rule_instance"
+				{
+					"name"		"AddSpecificStartRoom"
+					"$RoomName"		"$RoomName"
+					"$X"	"$X"
+					"$Y"	"$Y"
+				}
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"0"
+				}
+				// Add the area of the start room to the total generation area (since it's not part of a generation step)
+				"action"
+				{
+					"class"	"CTilegenAction_SetVariableInt"
+					"variable"	"TotalGenerationArea"
+					"value"
+					{
+						"class"	"+"
+						"param"
+						{
+							"class"	"var_int"
+							"variable"	"TotalGenerationArea"
+							"disallow_null"	"false"
+						}
+						"param"
+						{
+							"class"	"CTilegenExpression_RoomArea"
+							"param"
+							{
+								"class"	"var_room_template"
+								"variable"	"LastPlacedRoomTemplate"
+							}
+						}
+					}
+				}
+				"rule_instance"
+				{
+					"name"		"SwitchState"
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Random Start Room
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"PlaceRandomStartRoom"
+		"friendly_name"	"Random Start Room"
+		"description"	"Places a random start room at the location (60, 20)."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"description"	"Theme from which to choose start rooms."
+			"type"	"theme_name"
+			"source"	"literal|expression"
+			"default"
+			{
+				"rule_instance"
+				{
+					"name"	"GlobalTheme"
+				}
+			}
+		}
+		
+		"param"
+		{
+			"name"	"$X"
+			"friendly_name"	"X"
+			"description"	"X coordinate."
+			"type"	"int"
+			"source"	"literal"
+			"default"	"60"
+		}
+		
+		"param"
+		{
+			"name"	"$Y"
+			"friendly_name"	"Y"
+			"description"	"Y coordinate."
+			"type"	"int"
+			"source"	"literal"
+			"default"	"20"
+		}
+		
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"PlaceRandomStartRoom_%Unique"
+		
+				"rule_instance"
+				{
+					"name"		"AddAllStartRooms"
+					"$Theme"		"$Theme"
+					"$X"	"$X"
+					"$Y"	"$Y"
+				}
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"0"
+				}
+				// Add the area of the start room to the total generation area (since it's not part of a generation step)
+				"action"
+				{
+					"class"	"CTilegenAction_SetVariableInt"
+					"variable"	"TotalGenerationArea"
+					"value"
+					{
+						"class"	"+"
+						"param"
+						{
+							"class"	"var_int"
+							"variable"	"TotalGenerationArea"
+						}
+						"param"
+						{
+							"class"	"CTilegenExpression_RoomArea"
+							"param"
+							{
+								"class"	"var_room_template"
+								"variable"	"LastPlacedRoomTemplate"
+							}
+						}
+					}
+				}
+				"rule_instance"
+				{
+					"name"		"SwitchState"
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------	
+	"rule"
+	{
+		"name"		"AddAllStartRooms"
+		"friendly_name"	"Add All Start Room Candidates"
+		"description"	"Adds all start rooms as potential candidates."
+		"type"	"action"
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"type"	"theme_name"
+			"source"	"literal|expression"
+		}
+		
+		"param"
+		{
+			"name"	"$X"
+			"friendly_name"	"X"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"60"
+		}
+		
+		"param"
+		{
+			"name"	"$Y"
+			"friendly_name"	"Y"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"20"
+		}
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"		"CTilegenAction_AddRoomCandidatesAtLocation"
+				"Theme"		"$Theme"
+				"x"		"$X"
+				"Y"		"$Y"
+				"room_template_filter"
+				{
+					"class"		"CTilegenExpression_HasTag"
+					"tag"	"Start"
+					"room_template"
+					{
+						"class"		"var_room_template"
+						"variable"		"RoomTemplate"
+					}
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"AddSpecificStartRoom"
+		"friendly_name"	"Add Specific Start Room Candidate."
+		"description"	"Add a specific start room as a candidate."
+		"type"	"action"
+		
+		"param"
+		{
+			"name"	"$RoomName"
+			"friendly_name"	"Room template"
+			"description"	"Relative path to the room template file, including theme directory but without an extension."
+			"type"	"room_name"
+			"source"	"literal|expression"
+		}
+		
+		"param"
+		{
+			"name"	"$X"
+			"friendly_name"	"X"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"60"
+		}
+		
+		"param"
+		{
+			"name"	"$Y"
+			"friendly_name"	"Y"
+			"type"	"int"
+			"source"	"literal"
+			"default"	"20"
+		}
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"		"CTilegenAction_AddRoomCandidatesAtLocation"
+				"Theme"
+				{
+					"class"	"CTilegenExpression_ExtractThemeName"
+					"param"	"$RoomName"
+				}
+				
+				"x"		"$X"
+				"Y"		"$Y"
+				
+				"room_template_filter"
+				{
+					"class"		"streq"
+					"param0"
+					{
+						"class"		"CTilegenExpression_RoomName"
+						"param"
+						{
+							"class"		"var_room_template"
+							"variable"		"RoomTemplate"
+						}
+					}
+					"param1"
+					{
+						"class"	"CTilegenExpression_ExtractRoomName"
+						"param"	"$RoomName"
+					}
+				}
+			}
+			"action"
+			{
+				"class"	"CTilegenAction_EnsureRoomExists"
+				"roomname"	"$RoomName"
+			}
+		}
+	}
+}

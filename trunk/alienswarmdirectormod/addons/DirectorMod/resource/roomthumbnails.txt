@@ -1,0 +1,33 @@
+"RoomThumbnails"
+{
+	"Thumbnail"
+	{
+		"Filename"		"tilegen/roomtemplates/mod/rooms\4x2_corridor_room_2.tga"
+		"RoomX"		"-11008.000000"
+		"RoomY"		"10496.000000"
+		"RoomWide"		"1024.000000"
+		"RoomTall"		"512.000000"
+		"OutputWide"		"120.000000"
+		"OutputTall"		"60.000000"
+	}
+	"Thumbnail"
+	{
+		"Filename"		"tilegen/roomtemplates/mod/rooms\2x4_corridor_room.tga"
+		"RoomX"		"-9472.000000"
+		"RoomY"		"11264.000000"
+		"RoomWide"		"512.000000"
+		"RoomTall"		"1024.000000"
+		"OutputWide"		"60.000000"
+		"OutputTall"		"120.000000"
+	}
+	"Thumbnail"
+	{
+		"Filename"		"tilegen/roomtemplates/mod/rooms\4x2_corridor_room.tga"
+		"RoomX"		"-10752.000000"
+		"RoomY"		"11264.000000"
+		"RoomWide"		"1024.000000"
+		"RoomTall"		"512.000000"
+		"OutputWide"		"120.000000"
+		"OutputTall"		"60.000000"
+	}
+}

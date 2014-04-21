@@ -1,0 +1,10 @@
+GAME
+{
+"MailFrom1" "From: Philip Pittle"
+"MailDate1" "Date: 04/20/12"
+"MailSubject1" "Subject: Performance 3!"
+"MailBody1A" "Dear Player,"
+"MailBody1B" "This level was built for a Performance of 3.  This is the hardest setting and this level will be the longest possible.  While it contains all key areas, there will be extra areas and more aliens to fight!.  Additionally, the mission goals may be increased!
+"MailBody1C" "Good luck!"
+"MailBody1D" ""
+}

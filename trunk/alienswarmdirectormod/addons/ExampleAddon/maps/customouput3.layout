@@ -1,0 +1,177 @@
+"mission_settings"
+{
+	"MissionName"		"Escape"
+	"MissionDescription"		"Randomly generated escape mission."
+	"RandomSeed"		"0"
+	"TiltedView"		"0"
+	"BossInEscapeRoom"		"1"
+	"ShowItemStore"		"1"
+	"EncounterType"		"0"
+	"Filename"		"mod_escapeOnly.txt"
+}
+"mapmisc"
+{
+	"PlayerStartX"		"60"
+	"PlayerStartY"		"60"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"20"
+	"theme"		"mod"
+	"template"		"start_area\2x3_start_area"
+}
+"room"
+{
+	"posx"		"62"
+	"posy"		"19"
+	"theme"		"mod"
+	"template"		"rooms\3x4_server_room_1"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"23"
+	"theme"		"example"
+	"template"		"corridors\1x4_corridor_door"
+}
+"room"
+{
+	"posx"		"61"
+	"posy"		"23"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_n"
+}
+"room"
+{
+	"posx"		"59"
+	"posy"		"22"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap2_w"
+}
+"room"
+{
+	"posx"		"64"
+	"posy"		"18"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap_s"
+}
+"room"
+{
+	"posx"		"65"
+	"posy"		"22"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_e"
+}
+"room"
+{
+	"posx"		"58"
+	"posy"		"27"
+	"theme"		"example"
+	"template"		"rooms\5x5_office_crossing"
+}
+"room"
+{
+	"posx"		"63"
+	"posy"		"29"
+	"theme"		"example"
+	"template"		"rooms\3x5_chokepoint"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"32"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_n"
+}
+"room"
+{
+	"posx"		"66"
+	"posy"		"29"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_e"
+}
+"room"
+{
+	"posx"		"57"
+	"posy"		"29"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap2_w"
+}
+"room"
+{
+	"posx"		"64"
+	"posy"		"28"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap_s"
+}
+"room"
+{
+	"posx"		"63"
+	"posy"		"34"
+	"theme"		"mod"
+	"template"		"exit\7x8_exit_escapeOnly"
+}
+"room"
+{
+	"posx"		"70"
+	"posy"		"35"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_e"
+}
+"room"
+{
+	"posx"		"62"
+	"posy"		"35"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_w"
+}
+"room"
+{
+	"posx"		"68"
+	"posy"		"33"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap_s"
+}
+"room"
+{
+	"posx"		"59"
+	"posy"		"25"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_w"
+}
+"room"
+{
+	"posx"		"66"
+	"posy"		"32"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_e"
+}
+"room"
+{
+	"posx"		"62"
+	"posy"		"33"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap2_w"
+}
+"room"
+{
+	"posx"		"61"
+	"posy"		"26"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_e"
+}
+"room"
+{
+	"posx"		"59"
+	"posy"		"26"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_w"
+}
+"room"
+{
+	"posx"		"61"
+	"posy"		"25"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap2_e"
+}

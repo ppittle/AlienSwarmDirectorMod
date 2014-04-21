@@ -1,0 +1,10 @@
+GAME
+{
+"MailFrom1" "From: Philip Pittle"
+"MailDate1" "Date: 04/20/12"
+"MailSubject1" "Subject: Performance 1!"
+"MailBody1A" "Dear Player,"
+"MailBody1B" "This level was built for a Performance of 1.  While it contains all key areas, it will be a little shorter.  Additionally, the mission goals may be reduced."
+"MailBody1C" "Good luck!"
+"MailBody1D" ""
+}

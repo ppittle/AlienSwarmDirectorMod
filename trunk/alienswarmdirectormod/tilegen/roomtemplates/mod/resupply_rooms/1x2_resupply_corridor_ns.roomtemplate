@@ -1,0 +1,28 @@
+"corridors\1x2_resupply_corridor_ns"
+{
+	"TilesX"		"1"
+	"TilesY"		"2"
+	"SpawnWeight"		"0"
+	"TileType"		"0"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"1"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"Tags"
+	{
+		"tag"		"Resupply"
+		"tag"		"Unique"
+	}
+}

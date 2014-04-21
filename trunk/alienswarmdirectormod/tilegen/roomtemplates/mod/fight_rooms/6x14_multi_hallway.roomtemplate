@@ -1,0 +1,31 @@
+"rooms\5x14_multi_hallway"
+{
+	"TilesX"		"6"
+	"TilesY"		"14"
+	"SpawnWeight"		"0"
+	"TileType"		"151587341"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"13"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"2"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"1"
+	}	
+	"Tags"
+	{
+		"tag"		"Chokepoint"
+		"tag"		"Combat Arena"
+		"tag"       	"Fight Room"
+		"tag"		"Special"
+		
+	}	
+}

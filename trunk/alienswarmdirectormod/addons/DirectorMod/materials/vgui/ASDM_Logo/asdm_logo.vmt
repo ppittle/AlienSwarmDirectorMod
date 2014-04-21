@@ -1,0 +1,7 @@
+UnlitGeneric
+{
+$basetexture "vgui\ASDM_Logo\asdm_logo"
+$vertexcolor 1
+$vertexalpha 1
+$ignorez 1
+}

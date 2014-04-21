@@ -1,0 +1,57 @@
+"Mission"
+{
+	"Filename"		"mission_exit_test.txt"
+	"rule_instance"
+	{
+		"name"		"GlobalOptionBlock"
+		"$MissionName"		"Mission 2"
+		"$MissionDescription"		"Downloaded Data - Med"
+		"$GlobalTheme"		"mod"
+	}
+	"name"		"Mission 2"
+	"rule_instance"
+	{
+		"name"		"PlaceStartRoom"
+		"$RoomName"		"mod\start_area\2x3_start_area_medium"
+	}
+	"rule_instance"
+	{
+		"name"		"PlaceRandomEscapeRoom"
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"SpecificRoom"
+					"$RoomName"		"mod\exit\7x8_exit_dynamic"
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"1"
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\exit_goals\1x1_exit_goals_download_maint_data"
+						"$Fraction"		"0.1"
+					}
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"CapLevel"
+	}
+}

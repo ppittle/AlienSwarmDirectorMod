@@ -1,0 +1,39 @@
+"rules"
+{
+	"rule"
+	{
+		"name"	"LayoutOverride"
+		"friendly_name"	"Layout Override"
+		"description"	"Manually specifies a .layout file to use instead of random generation logic."
+		"type"	"state"
+		"hidden"	"0"
+
+		"param"
+		{
+			"name"	"$LayoutFile"
+			"friendly_name"	"Layout"
+			"description"	"Layout file to use directly (no random generation)."			
+			"type"	"layout_name"
+		}
+		
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"LayoutOverride"
+				
+				"action"
+				{
+					"class"	"CTilegenAction_LoadLayout"
+					"filename"	"$LayoutFile"
+				}
+				
+				"action"
+				{
+					"class"	"CTilegenAction_SwitchState"
+				}
+			}
+		}
+	}
+}
+			

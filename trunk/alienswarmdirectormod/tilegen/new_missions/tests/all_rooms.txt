@@ -1,0 +1,86 @@
+"Mission"
+{
+	"Filename"		"tests\all_rooms.txt"
+	"rule_instance"
+	{
+		"name"		"GlobalOptionBlock"
+		"$MissionName"		"Mission 2"
+		"$MissionDescription"		"Download Maint Data - Med"
+		"$GlobalTheme"		"mod"
+	}
+	"name"		"Mission 2"
+	"rule_instance"
+	{
+		"name"		"PlaceStartRoom"
+		"$RoomName"		"mod\start_area\2x3_start_area_hard"
+		"$X"		"60"
+		"$Y"		"60"
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"300"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomTemplateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Caps"
+				}
+			}
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"Disallow1x1"
+				}
+			}
+		}
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+			}
+		}
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Cap"
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"PlaceRandomEscapeRoom"
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"SpecificRoom"
+					"$RoomName"		"mod\exit\7x8_exit_dynamic"
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"CapLevel"
+	}
+}

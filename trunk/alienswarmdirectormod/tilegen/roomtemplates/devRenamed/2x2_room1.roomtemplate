@@ -1,0 +1,24 @@
+"2x2_room1"
+{
+	"TilesX"		"2"
+	"TilesY"		"2"
+	"SpawnWeight"		"0"
+	"Soundscape"		"sewers.conduit"
+	"TileType"		"0"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"1"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"0"
+		"ExitDirection"		"0"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+}

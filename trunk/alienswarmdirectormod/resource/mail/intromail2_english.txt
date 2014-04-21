@@ -1,0 +1,10 @@
+GAME
+{
+"MailFrom1" "From: Philip Pittle"
+"MailDate1" "Date: 04/20/85"
+"MailSubject1" "Subject: Genearl Game Hints!"
+"MailBody1A" "Dear Player,"
+"MailBody1B" "I want to take a moment to tell you about some of the differences between the Alien Swarm Director Mod, or ASDM, and the original Alien Swarm.  First off, ASDM is currently single player.  This is a significant shift from the original Alien Swarm as it greatly changes the squad dynamic; there is no longer a squad!  However, the built in classes still remain.  I have removed the tech-only restrictions so now any character class can hack computers and doors.  So if you want to use a Special Weapons expert, feel free! "
+"MailBody1C" "The other big change is now you are fighting alone, you'll no longer have team mates to back you up or cover you as reload.  Consequently, you may want to carry a second weapon that you can switch to when you don't have time to reload your primary.  Also, to avoid getting overrun, it may be helpful to retreat when a new horde is coming at you.  This way you can try and prevent the aliens from surrounding you; running blindly forward will certainly result in you getting swarmed.  Additionally, as there wont be a medic around, you may want to carry an extra health kit."
+"MailBody1D" "Finally, if you are interested in seeing how player performance is measured you can enable the debug screen.  This will show you how performance is calculated so you can see what behavior influences your minute-to-minute score.  First enable the developer's console from the keyboard settings.  Then open the console by pressing tilde '~' and type 'mod_player_performance_debug 1'.  To turn the debug screen off, open the console and type 'mod_player_performance_debug 0'.  I had a lot of fun making Alien Swarm Director Mod, I hope you enjoy playing it!"
+}

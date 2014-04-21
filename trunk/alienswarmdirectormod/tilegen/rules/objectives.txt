@@ -1,0 +1,305 @@
+"rules"
+{
+	"rule"
+	{
+		"name"	"PlaceComponents"
+		"friendly_name"	"Place Components"
+		"description"	"Places a series of rooms at specified points in time"
+		"type"	"action|global_action"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$MandatoryRooms"
+			"friendly_name"	"Mandatory Rooms"
+			"description"	"Rooms which must always be placed."
+			"array"	"unordered"
+			"type"	"room_placement"
+			"source"	"expression"
+		}
+		"param"
+		{
+			"name"	"$MinOptionalRooms"
+			"friendly_name"	"Min # Optional Rooms"
+			"description"	"Minimum number of optional rooms to choose."
+			"type"	"int"
+			"default"	"0"
+			"source"	"literal"
+		}
+		"param"
+		{
+			"name"	"$MaxOptionalRooms"
+			"friendly_name"	"Max # Optional Rooms"
+			"description"	"Maximum number of optional rooms to choose."
+			"type"	"int"
+			"default"	"0"
+			"source"	"literal"
+		}
+		"param"
+		{
+			"name"	"$OptionalRooms"
+			"friendly_name"	"Optional Rooms"
+			"description"	"Rooms which can randomly be placed."
+			"array"	"unordered"
+			"type"	"room_placement"
+			"source"	"expression"
+		}
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"description"	"Theme from which to choose connector rooms, if needed to place components."
+			"type"	"theme_name"
+			"source"	"literal|expression"
+			"default"
+			{
+				"rule_instance"
+				{
+					"name"	"GlobalTheme"
+				}
+			}
+		}		
+		"param"
+		{
+			"name"	"$ExitFilters"
+			"friendly_name"	"Exit Filters"
+			"description"	"Additional exit filter criteria."
+			"type"	"exit_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"friendly_name"	"Room Candidate Filters"
+			"description"	"Additional room candidate filter criteria."
+			"type"	"room_candidate_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		} 		
+		"param"
+		{
+			"name"	"$CandidateFilterActions"
+			"friendly_name"	"Candidate Filter Actions"
+			"description"	"Additional actions which can be used to pare down the list of allowed candidates."
+			"type"	"candidate_filter_action"
+			"source"	"expression"
+			"array"	"ordered"
+		}		
+
+		"substitute"
+		{
+			"action"
+			{
+				"class"	"CTilegenAction_NestedActions"
+				
+				// Set up a loop to keep placing components until no more are placed
+				"action"
+				{	
+					"class"	"CTilegenAction_SetVariableInt"
+					"variable"	"KeepPlacingComponents"
+					"value"	"1"
+				}
+				
+				// Keep trying to place components until there are no valid candidates to place
+				"action"
+				{
+					"class"	"CTilegenAction_NestedActions"
+					"while"
+					{
+						"class"	"=="
+						"param0"
+						{
+							"class"	"var_int"
+							"variable"	"KeepPlacingComponents"
+							"disallow_null"	"0"
+						}
+						"param1"	"1"
+					}
+				
+					// Attempt to place single component
+					"action"
+					{
+						"class"	"CTilegenAction_PlaceComponent"
+						"mandatory_rooms"	"$MandatoryRooms"
+						"min"	"$MinOptionalRooms"
+						"max"	"$MaxOptionalRooms"
+						"optional_rooms"	"$OptionalRooms"
+						"exit_filter"
+						{
+							"class"	"&&"
+							"_elide"	"$ExitFilters"
+						}
+						"room_candidate_filter"
+						{
+							"class"	"&&"
+							"_elide"	"$RoomCandidateFilters"
+						}
+						"room_candidate_filter_action"
+						{
+							"class"	"CTilegenAction_NestedActions"
+							"_elide"	"$CandidateFilterActions"
+						}
+						"connector_room_candidates"
+						{
+							"rule_instance"
+							{
+								"name"	"AddRoomCandidates"
+								"$Theme"
+								{
+									"rule_instance"
+									{
+										"name"	"GlobalTheme"
+									}
+								}
+								"$ExitFilters"	"$ExitFilters"
+								"$RoomCandidateFilters"	"$RoomCandidateFilters"
+								"$CandidateFilterActions"	"$CandidateFilterActions"
+							}
+						}
+					}
+					
+					// If we succeeded in placing a component, then continue to try more
+					"action"
+					{	
+						"class"	"CTilegenAction_SetVariableInt"
+						"variable"	"KeepPlacingComponents"
+						"value"
+						{
+							"class"	"var_int"
+							"variable"	"PlacedComponent"
+							"disallow_null"	"0"
+						}
+					}
+					
+					// If the last placed room was tagged with Chokepoint,
+					// set the "ChokepointCapping" flag to 1
+					"action"
+					{	
+						"class"	"CTilegenAction_SetVariableInt"
+						"variable"	"ChokepointCapping"
+						"value"	"1"
+						
+						"condition"
+						{
+							"class"	"&&"
+							"param"
+							{
+								"class"	"=="
+								"param0"
+								{
+									"class"	"var_int"
+									"variable"	"PlacedComponent"
+									"disallow_null"	"0"
+								}
+								"param1"	"1"
+							}
+							"param"
+							{
+								"class"	"CTilegenExpression_HasTag"
+								"tag"	"Chokepoint"
+								"room_template"
+								{
+									"class"	"var_room_template"
+									"variable"	"LastPlacedRoomTemplate"
+									"disallow_null"	"0"
+								}
+							}
+						}
+					}
+					
+					// Cap rooms while the "ChokepointCapping" flag is set.
+					"action"
+					{
+						"class"	"CTilegenAction_NestedActions"
+						"while"
+						{
+							"class"	"=="
+							"param0"
+							{
+								"class"	"var_int"
+								"variable"	"ChokepointCapping"
+								"disallow_null"	"0"
+							}
+							"param1"	"1"
+						}
+						
+						// This set of actions attempts to place 1 cap room at a time
+						"rule_instance"
+						{
+							"name"	"CapLevelInternal"
+							"$ExitFilter"
+							{
+								"class"	"!"
+								"param"
+								{
+									"class"	"CTilegenExpression_ChokepointGrowSource"
+									"param"
+									{
+										"class"	"var_exit"
+										"variable"	"Exit"
+									}
+								}
+							}
+							"$StopProcessing"	"0"
+						}
+						
+						// If "ChoseCandidate" == 0, then we can't place more caps, so set the "ChokepointCapping" flag to 0.
+						// Otherwise keep it at 1
+						"action"
+						{	
+							"class"	"CTilegenAction_SetVariableInt"
+							"variable"	"ChokepointCapping"
+							"value"
+							{
+								"class"	"var_int"
+								"variable"	"ChoseCandidate"
+								"disallow_null"	"0"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	"rule"
+	{
+		"name"	"SingleComponentRoom"
+		"friendly_name"	"Single Room"
+		"description"	"Placement information for a single room in a component."
+		"type"	"room_placement"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$RoomName"
+			"friendly_name"	"Room name"
+			"description"	"Room to place."
+			"type"	"room_name"
+			"source"	"expression|literal"
+		}
+		
+		"param"
+		{
+			"name"	"$Fraction"
+			"friendly_name"	"Placement"
+			"description"	"Fraction of current state or overall build to place. Specifying -1 results in a random placement value between [0.05, 0.95]."
+			"type"	"float"
+			"source"	"literal"
+		}
+		
+		"substitute"
+		{
+			"room"
+			{
+				"room_name"	"$RoomName"
+				"fraction"	"$Fraction"
+			}
+		}
+	}
+}

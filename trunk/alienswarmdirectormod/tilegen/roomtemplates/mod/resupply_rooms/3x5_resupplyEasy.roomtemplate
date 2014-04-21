@@ -1,0 +1,37 @@
+"rooms\3x5_resupplyEasy"
+{
+	"TilesX"		"3"
+	"TilesY"		"5"
+	"SpawnWeight"		"0"
+	"TileType"		"3735611"
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"4"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"4"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"2"
+		"YPos"		"4"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}	
+	"Tags"
+	{
+		"tag"		"Resupply"
+		"tag"		"Treasure"
+		"tag"		"Unique"
+	}
+}

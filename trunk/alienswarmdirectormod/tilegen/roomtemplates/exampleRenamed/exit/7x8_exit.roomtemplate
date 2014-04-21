@@ -1,0 +1,43 @@
+"exit\7x8_exit"
+{
+	"TilesX"		"7"
+	"TilesY"		"8"
+	"SpawnWeight"		"0"
+	"TileType"		"553648200"
+	"EXIT"
+	{
+		"XPos"		"5"
+		"YPos"		"7"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"7"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"0"
+		"YPos"		"6"
+		"ExitDirection"		"3"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"EXIT"
+	{
+		"XPos"		"6"
+		"YPos"		"6"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}
+	"Tags"
+	{
+		"tag"		"Escape"
+	}
+}

@@ -1,0 +1,28 @@
+"egg_rooms\5x8_egg_crew_quarters"
+{
+	"TilesX"		"5"
+	"TilesY"		"8"
+	"SpawnWeight"		"0"
+	"TileType"		"0"	
+	"EXIT"
+	{
+		"XPos"		"1"
+		"YPos"		"7"
+		"ExitDirection"		"2"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}	
+	"EXIT"
+	{
+		"XPos"		"4"
+		"YPos"		"4"
+		"ExitDirection"		"1"
+		"ZChange"		"0"
+		"ChokeGrow"		"0"
+	}	
+	"Tags"
+	{	
+		"tag"		"Special"
+		"tag"		"Egg Room"
+	}
+}

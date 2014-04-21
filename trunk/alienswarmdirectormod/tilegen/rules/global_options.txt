@@ -1,0 +1,258 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"GlobalOptionBlock"
+		"friendly_name"	"Global Options"
+		"description"	"Global options for the map."
+		"type"	"option_block"
+		"hidden"	"0"
+					
+		"param"
+		{
+			"name"	"$MissionName"
+			"friendly_name"	"Name"
+			"description"	"Display name of the mission (use localizable text)."
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"param"
+		{
+			"name"	"$MissionDescription"
+			"friendly_name"	"Description"
+			"description"	"Displayed description of the mission (use localizable text)."
+			"type"	"string"
+			"source"	"literal"
+		}
+		
+		"param"
+		{
+			"name"	"$RandomSeed"
+			"friendly_name"	"Random Seed"
+			"description"	"A starting random seed to use each time this level is generated.  If set to 0, the starting seed will be randomly generated."
+			"type"	"int"
+			"source"	"literal"
+			"default"	"0"
+		}
+		
+		"param"
+		{
+			"name"	"$TiltedView"
+			"friendly_name"	"Tilted View"
+			"description"	"Whether to render this level with a tilted view."
+			"type"	"bool"
+			"source"	"literal"
+			"default"	"0"
+		}
+		
+		"param"
+		{
+			"name"	"$BossInEscapeRoom"
+			"friendly_name"	"Auto Boss"
+			"description"	"Whether to automatically spawn a boss in the escape room."
+			"type"	"bool"
+			"source"	"literal"
+			"default"	"1"
+		}
+		
+		"param"
+		{
+			"name"	"$ShowItemStore"
+			"friendly_name"	"Show Item Store"
+			"description"	"Whether to show the item store and gambling options during the briefing for this mission."
+			"type"	"bool"
+			"source"	"literal"
+			"default"	"1"
+		}
+		
+		"param"
+		{
+			"name"	"$AlienSpawnSet"
+			"friendly_name"	"Alien Spawn Set"
+			"description"	"Name of the spawn set used to pick aliens in this mission.  Spawn sets are defined in resource/swarm/alien_selection.xlsm"
+			"type"	"string"
+			"source"	"literal"
+			"can_omit"	"1"
+		}
+		
+		"param"
+		{
+			"name"	"$EncounterType"
+			"friendly_name"	"Encounter Type"
+			"type"	"enum"
+			"enum"	"EncounterType"
+			"source"	"literal"
+			"default"	"0"
+		}
+		
+		"param"
+		{
+			"name"	"$GlobalTheme"
+			"friendly_name"	"Global Theme"
+			"description"	"Default theme to use throughout generation of the level."
+			"type"	"theme_name"
+			"source"	"literal"
+		}
+		
+		"param"
+		{
+			"name"	"$ExitFilters"
+			"friendly_name"	"Global Exit Filters"
+			"description"	"Global exit filter criteria, used in all generation steps & components."
+			"type"	"exit_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomTemplateFilters"
+			"friendly_name"	"Global Room Template Filters"
+			"description"	"Global room template filter criteria, used in all generation steps & components."
+			"type"	"room_template_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"friendly_name"	"Global Room Candidate Filters"
+			"description"	"Global room candidate filter criteria, used in all generation steps & components."
+			"type"	"room_candidate_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$CandidateFilterActions"
+			"friendly_name"	"Global Room Candidate Filter Actions"
+			"description"	"Global actions which can be used to pare down the list of allowed candidates, used in all generation steps & components."
+			"type"	"candidate_filter_action"
+			"source"	"expression"
+			"array"	"ordered"
+		}
+		
+		"substitute"
+		{
+			"mission_settings"
+			{
+				"MissionName"	"$MissionName"
+				"MissionDescription"	"$MissionDescription"
+				"RandomSeed"	"$RandomSeed"
+				"TiltedView"	"$TiltedView"
+				"BossInEscapeRoom"	"$BossInEscapeRoom"
+				"ShowItemStore"	"$ShowItemStore"
+				"AlienSpawnSet" "$AlienSpawnSet"
+				"EncounterType"	"$EncounterType"
+			}
+			
+			"action"
+			{
+				"class"	"CTilegenAction_SetVariableString"
+				"variable"	"GlobalTheme"
+				"value"	"$GlobalTheme"
+				"on_begin_generation"	"1"
+			}
+			
+			"action"
+			{
+				"class"	"CTilegenAction_SetVariableBoolExpression"
+				"variable"	"GlobalExitFilters"
+				"value"
+				{
+					"class"	"&&"
+					"_elide"	"$ExitFilters"				
+				}
+				"on_begin_generation"	"1"
+			}
+			
+			"action"
+			{
+				"class"	"CTilegenAction_SetVariableBoolExpression"
+				"variable"	"GlobalRoomTemplateFilters"
+				"value"
+				{
+					"class"	"&&"
+					"_elide"	"$RoomTemplateFilters"
+				}
+				"on_begin_generation"	"1"
+			}
+			
+			"action"
+			{
+				"class"	"CTilegenAction_SetVariableAction"
+				"variable"	"GlobalRoomCandidateFilterActions"
+				"value"
+				{
+					"class"	"CTilegenAction_NestedActions"
+					"_elide"	"$CandidateFilterActions"
+				}
+				"on_begin_generation"	"1"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"GlobalTheme"
+		"friendly_name"	"Global Theme"
+		"description"	"The theme set in the global options block."
+		"type"	"theme_name"
+		"hidden"	"0"
+		
+		"substitute"
+		{
+			"class"	"var_string"
+			"variable"	"GlobalTheme"
+		}
+	}
+	
+	"rule"
+	{
+		"name"	"LiteralTheme"
+		"friendly_name"	"Specific Theme"
+		"description"	"A specific theme."
+		"type"	"theme_name"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"description"	"Theme from which to choose rooms."
+			"type"	"theme_name"
+			"source"	"literal"
+		}
+			
+		"substitute"
+		{
+			"class"	"CTilegenExpression_LiteralString"
+			"value"	"$Theme"
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"enum"
+	{
+		"name"	"EncounterType"
+		"values"
+		{
+			"Per Room"	"0"
+			"Positional"	"1"
+		}
+	}
+}

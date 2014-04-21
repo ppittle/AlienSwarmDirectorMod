@@ -1,0 +1,208 @@
+"Mission"
+{
+	"Filename"		"mission1.txt"
+	"rule_instance"
+	{
+		"name"		"GlobalOptionBlock"
+		"$MissionName"		"Mission 1"
+		"$MissionDescription"		"Intro Level"
+		"$GlobalTheme"		"mod"
+	}
+	"name"		"Mission 1"
+	"rule_instance"
+	{
+		"name"		"PlaceStartRoom"
+		"$RoomName"		"mod\start_area\20x14_landing_bay_start_area"
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"100"
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\6x14_multi_hallway"
+						"$Fraction"		"0.300000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\resupply_rooms\1x2_resupply_corridor_ns"
+						"$Fraction"		"0.700000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\rooms\4x3_server_room_1"
+						"$Fraction"		"0.100000"
+					}
+				}
+			}
+		}
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"End Cap"
+				}
+			}
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowRoomTag"
+					"$Tag"		"Resupply"
+				}
+			}
+		}
+		"$CandidateFilterActions"
+		{
+			"rule_instance"
+			{
+				"name"		"LinearGrowth"
+				"$Threshold"		"10"
+			}
+		}
+		"$ExitFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowSouthGrowing"
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"65"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"Disallow1x1"
+				}
+			}
+		}
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\resupply_rooms\3x5_resupplymedium"
+						"$Fraction"		"0.700000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\resupply_rooms\3x5_resupplyeasy"
+						"$Fraction"		"0.700000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\resupply_rooms\3x5_resupplyhard"
+						"$Fraction"		"0.700000"
+					}
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\fight_rooms\6x3_ruined_lab"
+						"$Fraction"		"0.400000"
+					}
+				}
+			}
+		}
+		"$ExitFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"DisallowSouthGrowing"
+				}
+			}
+		}
+		"$CandidateFilterActions"
+		{
+			"rule_instance"
+			{
+				"name"		"LinearGrowth"
+				"$Threshold"		"5"
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"PlaceRandomEscapeRoom"
+		"$Theme"
+		{
+			"rule_instance"
+			{
+				"name"		"GlobalTheme"
+			}
+		}
+		"$RoomCandidateFilters"
+		{
+			"param"
+			{
+				"rule_instance"
+				{
+					"name"		"SpecificRoom"
+					"$RoomName"		"mod\exit\7x8_exit_dynamic"
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"GenerationStep"
+		"$Size"		"1"
+		"$ExtraRules"
+		{
+			"rule_instance"
+			{
+				"name"		"PlaceComponents"
+				"$MandatoryRooms"
+				{
+					"rule_instance"
+					{
+						"name"		"SingleComponentRoom"
+						"$RoomName"		"mod\exit_goals\1x1_exit_goals_no_extra_goals"
+						"$Fraction"		"<Enter Value>"
+					}
+				}
+			}
+		}
+	}
+	"rule_instance"
+	{
+		"name"		"CapLevel"
+	}
+}

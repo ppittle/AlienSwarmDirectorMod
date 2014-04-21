@@ -1,0 +1,10 @@
+GAME
+{
+"MailFrom1" "From: Philip Pittle"
+"MailDate1" "Date: 03/26/85"
+"MailSubject1" "Subject: Welcome!"
+"MailBody1A" "Dear Player,""MailBody1B" "Welcome to the Alien Swarm Director Mod!  This mod focuses on increasing replayability by creating a dynamic experience every time you play.  The ASDM complements the default Alien Swarm AI and Director in two ways.  First, ASDM enhances the TileGen map generator to automatically generate the map layout for missions 2-5 every time you play.  The layout is impacted by player performance, so the better you perform on mission 1, the longer and more challenging mission 2 will be.  You can monitor your performance on the HUD.  Three filled in boxes means you have excellent performance, two is medium, and so on."
+"MailBody1C" "The ASDM modifies the in-mission experience as well. Based on your performance some doors may or may not open and the number and type of enemies you will fight will differ.  When ASDM is changing the in game experience, a message will flash on your HUD indicating 'dynamic content'."
+"MailBody1D" "There will be a new PDA in the beginning of each level to inform you of how you are doing.  Enjoy the Alien Swarm Director Mod!!"
+
+}

@@ -1,0 +1,29 @@
+1) mod_dynamic_door_area does not work with prop_dynamic (door lock thingee).  Looks like prop_dynamic can open doors.
+2) mod_objective_escape - trigger level end, and spawn new map.
+	2 a) create mod_marker instead of mod_objective_escape?
+3) create a new trigger area that begins generating the next level on the map
+	3 a) How can a level generated on a server be downloaded to the client?
+4) plug mod_dynamic_door_area and mod_dynamic_difficulty_modifier_trigger into AI director.
+
+
+Notes:
+
+-asw_gamerules.cpp - CAlienSwarm:MissionComplete() - calculates XP.
+
+-build map:
+	- m_pMapLayout->SaveMapLayout( "maps/output.layout" ); (TileGenDialog.cpp 274)
+	- engine->ClientCmd_Unrestricted( "asw_spawning_enabled 1;  asw_build_map output.layout"); (TileGenDialog.cpp 284)
+	- this may be important: asw_build_map_frame.cpp - CASW_Build_Map_Frame::OnThink() - tells game to load level (i think?)
+	- can the IASW_Map_Builder be used?
+	-C_ASW_Player::LaunchMissionCompletFrame - C_MOD_Build_Mission_Map_For_Next_Mission::OnMissionComplete();
+
+-building the correct next map, ie what mission am in?
+	- CAlienSwarm::CampaignMissionsLeft(): 
+		//CASW_Campaign_Info *pCampaign = GetCampaignInfo();  
+		CASW_Campaign_Save *pSave = GetCampaignSave();
+		//new code
+		int iNextMission = pSave->m_iNumMissionsComplete;
+
+IMPORTANT !!! asw_show_all_singleplayer_maps 1
+
+fast reload, game event fired in asw_weapon_shared.cpp line 177

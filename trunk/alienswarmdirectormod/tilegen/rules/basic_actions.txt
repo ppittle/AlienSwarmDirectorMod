@@ -1,0 +1,400 @@
+"rules"
+{
+	//-----------------------------------------------------------------------------
+	// Exposes functionality similar to generation steps in the old
+	// layout system.
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"GenerationStep"
+		"friendly_name"	"Generation Step"
+		"description"	"A stage of the level generation process."
+		"type"	"state"
+		"hidden"	"0"
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"description"	"Theme from which to choose rooms."
+			"type"	"theme_name"
+			"source"	"expression"
+			"default"
+			{
+				"rule_instance"
+				{
+					"name"	"GlobalTheme"
+				}
+			}
+		}
+		
+		"param"
+		{
+			"name"	"$Size"
+			"friendly_name"	"Size"
+			"description"	"Target size, in tile area, to make this level generation step."
+			"type"	"int"
+			"source"	"literal|expression"
+		}
+		
+		"param"
+		{
+			"name"	"$ExitFilters"
+			"friendly_name"	"Exit Filters"
+			"description"	"Additional exit filter criteria."
+			"type"	"exit_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomTemplateFilters"
+			"friendly_name"	"Room Template Filters"
+			"description"	"Additional room template filter criteria."
+			"type"	"room_template_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"friendly_name"	"Room Candidate Filters"
+			"description"	"Additional room candidate filter criteria."
+			"type"	"room_candidate_filter"
+			"source"	"literal|expression"
+			"can_omit"	"1"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+ 		
+		"param"
+		{
+			"name"	"$CandidateFilterActions"
+			"friendly_name"	"Candidate Filter Actions"
+			"description"	"Additional actions which can be used to pare down the list of allowed candidates."
+			"type"	"candidate_filter_action"
+			"source"	"expression"
+			"array"	"ordered"
+		}
+		
+		"param"
+		{
+			"name"	"$ExtraRules"
+			"friendly_name"	"Additional Rules"
+			"description"	"Any additional actions that take place before adding & choosing room candidates go here."
+			"type"	"action"
+			"source"	"expression"
+			"array"	"ordered"
+		}
+		
+		"substitute"
+		{
+			"state"
+			{
+				"name"	"GenerationStep_%Unique"
+		
+				"_elide"	"$ExtraRules"
+				"rule_instance"
+				{
+					"name"	"GenerationStepSize"
+					"$Size"	"$Size"
+				}
+				"rule_instance"
+				{
+					"name"	"AddRoomCandidates"
+					"$Theme"	"$Theme"
+					"$ExitFilters"	"$ExitFilters"
+					"$RoomTemplateFilters"	"$RoomTemplateFilters"
+					"$RoomCandidateFilters"	"$RoomCandidateFilters"
+					"$CandidateFilterActions"	"$CandidateFilterActions"
+				}
+
+				// Pick a valid candidate
+				"rule_instance"
+				{
+					"name"	"ChooseRandomCandidate"
+					"$StopProcessing"	"1"
+				}
+				
+				// If this fails, we're boned
+				"action"
+				{
+					"class"	"CTilegenAction_EpicFail"
+				}
+			}	
+		}
+	}
+		
+		
+
+	//-----------------------------------------------------------------------------
+	// Randomly chooses a room placement from the set of room candidates built
+	// up in this iteration of the state.
+	// You must use a rule to add room candidates for this to have any effect
+	// (and vice versa).
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"ChooseRandomCandidate"
+		"friendly_name"	"Choose Random Candidate"
+		"description"	"Randomly chooses a room from the current set of room candidates. You must have a prior rule in the current state to add room candidates for this action to have any effect."
+		"type"	"action"
+		
+		"param"
+		{
+			"name"	"$StopProcessing"
+			"friendly_name"	"Stop processing if chosen."
+			"description"	"Stops processing further rules in this state for the current iteration if a valid room is chosen (default: yes)."
+			"default"	"1"
+			"type"	"bool"
+			"source"	"literal"
+		}
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"		"CTilegenAction_ChooseCandidate"
+				"stop_processing"	"$StopProcessing"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Switches state
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"		"SwitchState"
+		"friendly_name"	"Switch State"
+		"description"	"Goes to a state (default: next state) when a condition is met (default: no condition)."
+		"type"	"action"
+		
+		"param"
+		{
+			"name"	"$Condition"
+			"friendly_name"	"Condition"
+			"description"	"A conditional expression which determines whether or not to switch state (can be omitted)."
+			"can_omit"	"1"
+			"type"	"bool"
+			"source"	"expression"
+		}
+		
+		"param"
+		{
+			"name"	"$NewState"
+			"friendly_name"	"New State"
+			"description"	"The new state to advance to. If omitted, goes to the next state."
+			"can_omit"	"1"
+			"type"	"string"
+			"source"	"literal|expression"
+		}
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"		"CTilegenAction_SwitchState"
+				"new_state"	"$NewState"
+				"condition"	"$Condition"
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	// Establishes the size of the current generation step.
+	// This is required for components to work and to make a state 
+	// automatically transition to the next state after N tiles have been placed.
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"GenerationStepSize"
+		"friendly_name"	"Generation Step Size"
+		"description"	"Total room area to place in this generation step."
+		"type"	"action"
+		
+		"param"
+		{
+			"name"	"$Size"
+			"friendly_name"	"Size"
+			"description"	"Target size, in tile area, to make this level generation step."
+			"type"	"int"
+			"source"	"literal|expression"
+		}
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"	"CTilegenAction_SetVariableInt"
+				"variable"	"GenerationArea_%Unique"
+				"value"	"$Size"
+				"on_begin_generation"	"1"
+			}
+			
+			"action"
+			{
+				"class"	"CTilegenAction_SetVariableInt"
+				"variable"	"TotalGenerationArea"
+				"value"
+				{
+					"class"	"+"
+					"param"
+					{
+						"class"	"var_int"
+						"variable"	"GenerationArea_%Unique"
+					}
+					"param"
+					{
+						"class"	"var_int"
+						"variable"	"TotalGenerationArea"
+						"disallow_null"	"0"
+					}
+				}
+				"on_begin_generation"	"1"
+			}
+			
+			"action"
+			{
+				"class"	"CTilegenAction_SetVariableInt"
+				"variable"	"StepGenerationArea"
+				"value"
+				{
+					"class"	"var_int"
+					"variable"	"GenerationArea_%Unique"
+				}
+				"on_begin_state"	"1"
+			}
+			
+			"rule_instance"
+			{
+				"name"		"SwitchState"
+				"$Condition"
+				{
+					"rule_instance"
+					{
+						"name"		"AtLeastNTilesPlacedThisStep"
+						"$N"
+						{
+							"class"	"var_int"
+							"variable"	"StepGenerationArea"
+							"disallow_null"	"0"
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	"rule"
+	{
+		"name"	"AddRoomCandidates"
+		"friendly_name"	"Add Room Candidates"
+		"description"	"Adds all valid, randomly-placeable room templates from the given theme as potential room candidates.  A subsequent rule must be specified to choose a candidate from the built-up list of room candidates."
+		"type"	"action"
+		
+		"param"
+		{
+			"name"	"$Theme"
+			"friendly_name"	"Theme"
+			"type"	"theme_name"
+			"source"	"literal|expression"
+		}
+		
+		"param"
+		{
+			"name"	"$ExitFilters"
+			"friendly_name"	"Exit Filters"
+			"description"	"Additional exit filter criteria."
+			"type"	"exit_filter"
+			"source"	"expression"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomTemplateFilters"
+			"friendly_name"	"Room Template Filters"
+			"description"	"Additional room template filter criteria."
+			"type"	"room_template_filter"
+			"source"	"expression"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$RoomCandidateFilters"
+			"friendly_name"	"Room Candidate Filters"
+			"description"	"Additional room candidate filter criteria."
+			"type"	"room_candidate_filter"
+			"source"	"expression"
+			"array"	"unordered"
+			"element_container"	"param"
+		}
+		
+		"param"
+		{
+			"name"	"$CandidateFilterActions"
+			"friendly_name"	"Candidate Filter Actions"
+			"description"	"Additional actions which can be used to pare down the list of allowed candidates."
+			"type"	"candidate_filter_action"
+			"source"	"expression"
+			"array"	"ordered"
+		}
+		
+		"substitute"
+		{
+			"action"
+			{
+				"class"		"CTilegenAction_AddRoomCandidates"
+				"theme"		"$Theme"
+				"exit_filter"
+				{
+					"class"	"&&"
+					"_elide"	"$ExitFilters"
+				}
+				"room_template_filter"
+				{
+					"class"	"&&"
+					"param"
+					{
+						"class"		"CTilegenExpression_CanPlaceRandomly"
+						"room_template"
+						{
+							"class"		"var_room_template"
+							"variable"		"RoomTemplate"
+						}
+					}
+					"param"
+					{
+						"rule_instance"
+						{
+							"name"	"UniqueRooms"
+						}
+					}
+					"_elide"	"$RoomTemplateFilters"
+				}
+				"room_candidate_filter"
+				{
+					"class"	"&&"
+					"_elide"	"$RoomCandidateFilters"
+				}
+				"room_candidate_filter_action"
+				{
+					"class"	"CTilegenAction_NestedActions"
+					"_elide"	"$CandidateFilterActions"
+				}
+			}
+		}
+	}
+}

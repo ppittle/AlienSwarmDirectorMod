@@ -1,0 +1,93 @@
+"mission_settings"
+{
+	"MissionName"		"Escape"
+	"MissionDescription"		"Randomly generated escape mission."
+	"RandomSeed"		"0"
+	"TiltedView"		"0"
+	"BossInEscapeRoom"		"1"
+	"ShowItemStore"		"1"
+	"EncounterType"		"0"
+	"Filename"		"mod_easy.txt"
+}
+"mapmisc"
+{
+	"PlayerStartX"		"60"
+	"PlayerStartY"		"60"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"20"
+	"theme"		"mod"
+	"template"		"start_area\2x3_start_area"
+}
+"room"
+{
+	"posx"		"62"
+	"posy"		"19"
+	"theme"		"mod"
+	"template"		"rooms\3x4_server_room_1"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"23"
+	"theme"		"mod"
+	"template"		"mod_corridors\1x4_corridor_door_medium"
+}
+"room"
+{
+	"posx"		"53"
+	"posy"		"21"
+	"theme"		"mod"
+	"template"		"exit\7x8_exit_escapeOnly"
+}
+"room"
+{
+	"posx"		"64"
+	"posy"		"18"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap_s"
+}
+"room"
+{
+	"posx"		"60"
+	"posy"		"27"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_n"
+}
+"room"
+{
+	"posx"		"58"
+	"posy"		"20"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap_s"
+}
+"room"
+{
+	"posx"		"65"
+	"posy"		"22"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap3_e"
+}
+"room"
+{
+	"posx"		"61"
+	"posy"		"23"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap2_n"
+}
+"room"
+{
+	"posx"		"52"
+	"posy"		"22"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap1_w"
+}
+"room"
+{
+	"posx"		"54"
+	"posy"		"20"
+	"theme"		"mod"
+	"template"		"end_caps\1x1_endcap_s"
+}

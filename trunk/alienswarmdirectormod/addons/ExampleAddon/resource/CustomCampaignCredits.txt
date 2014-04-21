@@ -1,0 +1,18 @@
+"Credits"
+{
+// these keys must be in this order!
+"show_credits_logo" "1"
+"custom_logo"	"ExampleCustomLogo/example_custom_logo"
+"asw_credits_"	"Philip Pittle"
+"asw_credits_"	""
+"asw_credits_"	"Alien Swarm Director Mod"
+"asw_credits_"	""
+"asw_credits_"	""
+"asw_credits_"	"Created for Game Programming"
+"asw_credits_"	"MAIGP6.1"
+"asw_credits_"	"Taught by Prof Frank Aldershoff" 
+"asw_credits_"	"University of Amsterdam"
+"asw_credits_"	"May 2011"
+"asw_credits_"	""
+"asw_credits_"	""
+}
